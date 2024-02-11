@@ -1,0 +1,54 @@
+<div class="container" >
+    <div class="card">
+            <h1>Facilities</h1>
+    
+    <form>
+        <div class="form-group">
+          <label>Room Name</label>
+          <input type="text" [(ngModel)]="RoomName" [ngModelOptions]="{standalone: true}" class="form-control" id="RoomName" placeholder="Room Name">
+        </div>
+    
+        <div class="form-group">
+          <label>Room Description </label>
+          <input type="text" [(ngModel)]="RoomDesc" [ngModelOptions]="{standalone: true}" class="form-control" id="RoomDesc" placeholder="Room Description">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4" (click)="save()" >Save</button>
+        <button type="button" class="btn btn-danger" (click)="addRooms()">Add</button>
+        
+      </form>
+    </div>
+    
+  
+    
+        <div>
+        <table>
+            <thead>
+             <h1 *ngIf="!isResultLoaded">Loading.................</h1>      
+            <tr>
+                <th scope="col">Room ID</th>
+                <th scope="col">Room</th>
+                <th scope="col">Room Description</th>   
+                <th scope="col">Room Status</th>  
+              </tr>
+            </thead>
+            <tbody>
+                <!-- | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: EquipmentArray.length } -->
+                <tr *ngFor="let RoomItem of RoomsArray">
+                <td>{{ RoomItem.RoomID }}</td>
+                <td>{{ RoomItem.RoomName }}</td>
+                <td>{{ RoomItem.RoomDesc }}</td>
+                <td>
+                    <button type="button" (click)="toggleActive(RoomItem)">
+                      {{ RoomItem.RoomStatus ? 'Active' : 'Inactive' }}
+                    </button>
+                  </td>
+                <td>
+                  <button type="button" class="btn btn-success" (click)="setUpdate(RoomItem)">Edit</button>
+                  <button type="button" class="btn btn-danger" (click)="deleteRoom(RoomItem)">Delete</button>            
+                </td>
+              </tr>          
+            </tbody>
+          </table>
+          <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+        </div>

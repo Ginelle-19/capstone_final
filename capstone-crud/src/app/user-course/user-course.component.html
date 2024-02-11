@@ -1,0 +1,33 @@
+<div class="container-course">
+  <div class="container-inside">
+      <div class="card">
+        <p>Courses</p>
+        
+  
+        <div class="container-table">
+        <div *ngIf="isResultLoaded">
+          <table cellspacing="0">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Course Code</th>
+                <th scope="col">Course Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let CourseItem of CourseArray">
+                <td>{{ CourseItem.CourseID }}</td>
+                <td>{{ CourseItem.CourseCode }}</td>
+                <td>{{ CourseItem.CourseName }}</td>
+                <!-- <td> -->
+                  <!-- You can keep the filterEquipment button if needed -->
+                  <!-- <button type="button" (click)="filterEquipment()">Filter Equipment</button> -->
+                <!-- </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>

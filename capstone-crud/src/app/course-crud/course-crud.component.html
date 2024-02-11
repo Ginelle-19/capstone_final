@@ -1,0 +1,57 @@
+<div class="container-course-crud">
+<div class="container-inside">
+    <div class="card">
+            <p>Courses</p>
+
+    <form>
+        <div class="container-form-group">
+        <div class="form-group">
+          <label>Course Code</label>
+          <input type="text" [(ngModel)]="CourseCode" [ngModelOptions]="{standalone: true}" class="form-control" id="CourseCode" placeholder="Enter Code">
+        </div>
+
+        <div class="form-group">
+          <label>Course Name</label>
+          <input type="text" [(ngModel)]="CourseName" [ngModelOptions]="{standalone: true}" class="form-control" id="CourseName" placeholder="Enter Name">
+        </div>
+      </div>
+ 
+      <div class="container-button">
+        <button type="button"  (click)="register()">Add</button>
+        <button type="submit"  (click)="save()" >Save</button>
+      </div>
+      </form>
+    </div>
+
+
+
+        <div class="container-table">
+          <table cellspacing="0">
+
+            <thead>
+              <tr *ngIf="!isResultLoaded">
+                <th colspan="4">Loading.................</th>
+              </tr>
+              <tr *ngIf="isResultLoaded">
+                <th scope="col">ID</th>
+                <th scope="col">Course Code</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let CourseItem of CourseArray">
+                <td>{{ CourseItem.CourseID  }}</td>
+                <td>{{ CourseItem.CourseCode }}</td>
+                <td>{{ CourseItem.CourseName }}</td>
+                <td class="table-button">
+                  <button type="button"  (click)="setUpdate(CourseItem)">Edit</button>
+                  <button type="button"  (click)="setDelete(CourseItem)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+</div>
+</div>

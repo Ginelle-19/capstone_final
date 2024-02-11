@@ -1,0 +1,43 @@
+<div class="container-equipment">
+  <div class="container-inside">
+      <div class="card">
+        <p>Equipment</p>
+    
+        <form>
+    
+          <div class="container-filter">
+            <select [(ngModel)]="SelectedCourseID" [ngModelOptions]="{standalone: true}">
+              <option *ngFor="let course of CourseArray" [value]="course.CourseID">{{ course.CourseName }}</option>
+            </select>
+            <button (click)="filterEquipments()">Filter</button>
+          </div>
+        </form>
+      </div>
+    
+      <div class="container-table">
+        <table cellspacing="0">
+          <thead>
+            <h1 *ngIf="!isResultLoaded">Loading.................</h1>
+            <tr>
+              <!-- <th scope="col">ID</th> -->
+              <th scope="col">Equipment Name</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let EquipmentItem of EquipmentArray | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: EquipmentArray.length }">
+              <!-- <td>{{ EquipmentItem.EquipmentID }}</td> -->
+              <td>{{ EquipmentItem.EquipmentName }}</td>
+              <td>{{ EquipmentItem.Quantity }}</td>
+              <!-- <td> -->
+                <!-- Remove Edit and Delete buttons -->
+              <!-- </td> -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-pagination-outer">
+        <pagination-controls class="table-pagination-inner" (pageChange)="p = $event"></pagination-controls>
+      </div>
+      </div>
+    </div>
+  </div>

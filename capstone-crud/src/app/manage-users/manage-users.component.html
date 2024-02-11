@@ -1,0 +1,38 @@
+<div>
+  <table *ngIf="isResultLoaded">
+    <thead>
+      <tr>
+        <th scope="col">Last Name</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Student Number</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Password</th>
+        <th scope="col">Access Level</th>
+        <th scope="col">isActive</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.LastName }}</td>
+        <td>{{ user.FirstName }}</td>
+        <td>{{ user.StudentNum }}</td>
+        <td>{{ user.UserName }}</td>
+        <td>{{ user.Password }}</td>
+        <td>
+          <select [(ngModel)]="user.AccessLevelID" (change)="updateAccessLevel(user)">
+            <option *ngFor="let AccessItem of AccessLevels" [value]="AccessItem.AccessLevelID">{{ AccessItem.AccessName }}</option>
+          </select>
+        </td>
+        <td>
+          <button type="button" (click)="toggleActive(user)">{{ user.isActive ? 'Active' : 'Inactive' }}</button>
+        </td>
+        <td>
+          <button type="button" (click)="setUpdate(user)">Edit</button>
+          <button type="button" (click)="deleteUser(user)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 *ngIf="!isResultLoaded">Loading.................</h1>
+</div>

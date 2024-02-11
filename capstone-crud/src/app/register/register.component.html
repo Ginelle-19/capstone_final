@@ -1,0 +1,53 @@
+<div class="body">
+  <div class="container">
+    <div class="register-form">
+      <div class="header">
+        <h1>Create an account</h1>
+      </div>
+      <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+        <div>
+          <label for="FirstName">First Name</label>
+          <input type="text" placeholder="Enter your first name" id="FirstName" formControlName="FirstName" required>
+          <div *ngIf="registerForm.get('FirstName')?.invalid && (registerForm.get('FirstName')?.dirty || registerForm.get('FirstName')?.touched)">
+            <span class="error-message">First Name is required</span>
+          </div>
+        </div>
+        <!-- Repeat the same structure for other input fields -->
+        <div>
+          <label for="LastName">Last Name</label>
+          <input type="text" placeholder="Enter your last name" id="LastName" formControlName="LastName" required>
+          <div *ngIf="registerForm.get('LastName')?.invalid && (registerForm.get('LastName')?.dirty || registerForm.get('LastName')?.touched)">
+            <span class="error-message">Last Name is required</span>
+          </div>
+        </div>
+        <div>
+          <label for="Birthdate">Birthday</label>
+          <input type="date" id="Birthdate" formControlName="Birthdate" required>
+          <div *ngIf="registerForm.get('Birthdate')?.invalid && (registerForm.get('Birthdate')?.dirty || registerForm.get('Birthdate')?.touched)">
+            <span class="error-message">Birthdate is required</span>
+          </div>
+        </div>
+        <div>
+          <label for="StudentNum">Student Number</label>
+          <input type="text" placeholder="Enter your student number" id="StudentNum" formControlName="StudentNum" required>
+          <div *ngIf="registerForm.get('StudentNum')?.invalid && (registerForm.get('StudentNum')?.dirty || registerForm.get('StudentNum')?.touched)">
+            <span class="error-message">Student Number is required</span>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="container-button">
+          <div class="text-separator">
+            <button type="submit" [disabled]="!registerForm.valid || isRegistering">
+              Register<mat-icon>check_circle</mat-icon>
+            </button>
+          </div>
+          <a [routerLink]="['/login']">
+            <button type="button">Go Back<mat-icon>arrow_circle_left</mat-icon></button>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

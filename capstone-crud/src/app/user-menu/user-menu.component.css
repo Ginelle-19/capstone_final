@@ -1,0 +1,193 @@
+button {
+  background-color: transparent;
+  outline: 0px;
+  border: 0;
+}
+
+mat-icon {
+  color: black;
+  display: block;
+  margin: auto;
+}
+
+.sidenav-container  a {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.menu-icon{
+  color: #f3f3f3;
+}
+
+.mat-sidenav {
+  width: 102px;
+  padding: 0;
+}
+
+.mat-sidenav-content {
+  background: url("/assets/ccjef_last.jpg");
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
+
+.container-navlist {
+  display: block;
+}
+
+.mat-sidenav-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidenav-container .itemlink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  -webkit-transition: 0.1s;
+  transition: 0.5s;
+}
+
+.sidenav-container .itemlink-last {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 0px;
+  -webkit-transition: 0.1s;
+  transition: 0.5s;
+}
+
+.sidenav-container .itemlink:hover {
+  background-color: #e2bce2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav-container .list-last-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.sidenav-container .list-last {
+  border: 1px solid #474747;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-top: -130px;
+  height: 50px;
+}
+
+.sidenav-container .list-last:hover{
+  background-color: var(--lightest-color);
+  border: 1px solid var(--lightest-color);
+}
+
+.sidenav-container .list-last a {
+  color: black;
+}
+
+.sidenav-container .list-last mat-icon{
+  color: black;
+}
+
+
+
+/*.mdc-list {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}*/
+
+
+
+.content-container {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+table {
+  width: 80%;
+  margin-top: 20px;
+}
+
+.mat-toolbar {
+  height: 120px;
+  background-color: #993399;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;  
+}
+
+.mat-toolbar img {
+  height: 100px;
+  width: 100px;
+  margin-left: 16px;
+  object-fit: contain; /* Ensure the image fits within the container */
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Center text horizontally */
+}
+
+
+.mat-toolbar span {
+  font-size: 35px;
+  color: #f3f3f3;
+}
+
+.mat-toolbar h4 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #f3f3f3;
+}
+
+.custom-toolbar {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+ /* Ensure space between button and title */
+  padding: 0px 16px;
+}
+
+.centered-content {
+  display: flex;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.mat-toolbar img {
+  height: 100px;
+  width: 100px;
+  margin-right: 16px;
+  object-fit: contain; /* Ensure the image fits within the container */
+}
+
+span, h4 {
+  margin: 8px 0;
+  font-family: 'Oswald', sans-serif;
+}
