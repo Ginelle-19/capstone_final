@@ -22,7 +22,7 @@ server.post('/send-email', (req, res) => {
         service: 'gmail',
         auth: {
             user: 'labsolutionsccjef@gmail.com', // Your email address
-            pass: 'jqro oblg gkme qfdx' // Your email password or app-specific password if using Gmail
+            pass: '' // Your email password or app-specific password if using Gmail
         }
     });
   
