@@ -22,7 +22,7 @@ server.post('/send-email', (req, res) => {
         service: 'gmail',
         auth: {
             user: 'labsolutionsccjef@gmail.com', // Your email address
-            pass: '' // Your email password or app-specific password if using Gmail
+            pass: 'jqro oblg gkme qfdx' // Your email password or app-specific password if using Gmail
         }
     });
   
@@ -70,7 +70,9 @@ db.connect(function (error) {
   if (error) console.log("Error Connecting to DB");
   else console.log("Successfully Connected to DB");
 });
-
+server.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 // Establish the Port
 server.listen(8085, function check(error) {
