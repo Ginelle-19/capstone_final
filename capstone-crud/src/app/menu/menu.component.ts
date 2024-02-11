@@ -9,22 +9,17 @@ import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [RouterModule, MatSidenavModule,
+  imports: [
+    RouterModule,
+    MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule,],
+    MatListModule,
+  ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
-  providers: [
-    LoginComponent
-  ]
+  providers: [LoginComponent],
 })
 export class MenuComponent {
-  imageUrl: string = '/assets/ccjef_logo.png'
-
-
-  // constructor(private loginComponent: LoginComponent) {}
-  // handleLogout() {
-  //   this.loginComponent.logout(); // Call logout from LoginComponent
-  // }
+  imageUrl: string = '/assets/ccjef_logo.png';
 }

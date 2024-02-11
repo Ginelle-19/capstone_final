@@ -70,7 +70,9 @@ db.connect(function (error) {
   if (error) console.log("Error Connecting to DB");
   else console.log("Successfully Connected to DB");
 });
-
+server.use(cors({
+    origin: 'http://localhost:4200'
+}));
 
 // Establish the Port
 server.listen(8085, function check(error) {

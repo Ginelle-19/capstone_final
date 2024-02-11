@@ -1,59 +1,51 @@
-
-/* .container{
-    outline: 1px solid red;
-    width: 400px;
-} 
-body, html {
+body {
     height: 100%;
-    margin: 500px;
-    font-family: 'Inter', sans-serif;
-}
-.outer-container {
-    background-color: #e2bce2; 
-  } */
+  }
+  
+  .mat-simple-snackbar {
+    justify-content: center !important;
+  }
+  
   .container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: url('/assets/mainbg.jpg') center center/cover no-repeat;
+    background: url("/assets/mainbg.jpg") center center/cover no-repeat;
     background-color: rgba(255, 255, 255, 0.1);
-}
-
-.outer-container .container .login-form .login-header {
+  }
+  
+  .outer-container .container .login-form .login-header {
     margin-bottom: 30px;
-}
-
-
-.login-form {
-    width: 300px; /* Adjust the width as needed */
+  }
+  
+  .login-form {
+    width: 300px;
     margin-left: 30px;
     text-align: center;
     padding: 35px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #f3f3f3; /* Optional: Add a subtle box shadow for depth */
-    opacity: 0.9;
-}
-
-.login-form label {
+    background-color: #f3f3f3ee;
+  }
+  
+  .login-form label {
     display: block;
     margin-bottom: 8px;
     text-align: left;
-}
-
-
-.login-form input {
+  }
+  
+  .login-form input {
     width: 100%;
     padding: 12px;
     margin-bottom: 16px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-input[type=text] {
+  }
+  
+  input[type="text"] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -64,11 +56,11 @@ input[type=text] {
     outline: none;
   }
   
-  input[type=text]:focus {
+  input[type="text"]:focus {
     border: 2px solid #993399;
   }
-
-  input[type=password] {
+  
+  input[type="password"] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -79,11 +71,11 @@ input[type=text] {
     outline: none;
   }
   
-  input[type=password]:focus {
+  input[type="password"]:focus {
     border: 2px solid #993399;
   }
-
-.login-form button {
+  
+  .login-form button {
     width: 100%; /* Make the button 50% of the container width */
     margin-top: 10px; /* Add margin to the top */
     padding: 13px;
@@ -99,9 +91,9 @@ input[type=text] {
     margin-left: auto; /* Center the button horizontally */
     margin-right: auto; /* Center the button horizontally */
     font-size: 15px;
-}
-
-.login-form button[type=button]{
+  }
+  
+  .login-form button[type="button"] {
     width: 100%; /* Make the button 50% of the container width */
     margin-top: 10px; /* Add margin to the top */
     padding: 13px;
@@ -117,17 +109,17 @@ input[type=text] {
     margin-left: auto; /* Center the button horizontally */
     margin-right: auto; /* Center the button horizontally */
     font-size: 15px;
-}
-
-.login-form button:hover {
+  }
+  
+  .login-form button:hover {
     background-color: #660066; /* Darker green color on hover, adjust as needed */
-}
-
-.cancel-button-div {
+  }
+  
+  .cancel-button-div {
     text-align: right;
-}
-
-.overlay {
+  }
+  
+  .overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -135,105 +127,107 @@ input[type=text] {
     height: 100%;
     background: rgba(0, 0, 0, 0.5); /* Adjust the transparency as needed */
     z-index: 1;
-}
-
-.login-form a {
+  }
+  
+  .login-form a {
     text-decoration: none;
-}
-
-/* Modified styles for the image container and image */
-.image-container {
+  }
+  
+  /* Modified styles for the image container and image */
+  .image-container {
     display: flex;
     align-items: center;
     flex-direction: column; /* Stack items vertically */
     margin-right: 20px; /* Adjust the margin as needed */
-}
-
-.image-container img {
+  }
+  
+  .image-container img {
     max-width: 260px;
     height: auto;
     border-radius: 8px; /* Optional: Add border-radius for rounded corners */
-}
-
-.text-container {
+  }
+  
+  .text-container {
     margin-top: 0px; /* Adjust the margin as needed */
     text-align: center; /* Center the text */
-}
-
-.text-container h2 {
+  }
+  
+  .text-container h2 {
     margin-top: 10px; /* Adjust the margin as needed */
     margin-bottom: 0px;
-    font-family: 'Inter', sans-serif; 
+    font-family: "Inter", sans-serif;
     font-size: 50px;
     font-weight: 700;
     color: white;
-}
-
-.text-container h3 {
+  }
+  
+  .text-container h3 {
     margin-top: 0px; /* Adjust the margin as needed */
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 20px;
     font-weight: 700;
     color: white;
-}
-.text-container p {
+  }
+  .text-container p {
     margin-top: -10px; /* Adjust the margin as needed */
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 12px;
     color: white;
-    
-}
-.form-check {
+  }
+  .form-check {
     display: grid;
     grid-template-rows: auto auto; /* Two rows, auto-sized */
     align-items: center;
-}
-.form-check a{
+  }
+  .form-check a {
     color: var(--normal-color);
     transition: 0.5;
-}
-
-.form-check a:hover{
+  }
+  
+  .form-check a:hover {
     color: var(--darkest-color);
     transform: scale(1.1);
-}
-
-.form-check input[type="checkbox"] {
+  }
+  
+  .form-check input[type="checkbox"] {
     grid-row: 1; /* Place the checkbox in the first grid row */
     grid-column: 2;
     margin-top: 15px;
     padding: 0px;
     margin-left: -7px;
-}
-
-.form-check label {
+  }
+  
+  .form-check label {
     grid-row: 1; /* Place the label in the second grid row */
     grid-column: 1;
     text-align: left;
     margin: 0px;
     padding: 0px;
     font-weight: 500;
-}
-
-.outer-container .container .login-form .content mat-icon {
+  }
+  
+  .outer-container .container .login-form .content mat-icon {
     margin-left: 5px;
-  font-size: 20px;
-  width: 10%;
-  height: 100%;
-}
-
-
-
-.outer-container .container .login-form .content .register-button a button{
+    font-size: 20px;
+    width: 10%;
+    height: 100%;
+  }
+  
+  .outer-container .container .login-form .content .register-button a button {
     display: flex;
     justify-content: center;
     align-items: center;
-   padding-left: 35px;
-}
-
-.outer-container .container .login-form .content button[type=button] mat-icon {
+    padding-left: 35px;
+  }
+  
+  .outer-container
+    .container
+    .login-form
+    .content
+    button[type="button"]
+    mat-icon {
     margin-left: -10px;
     font-size: 20px;
     width: 24%;
     height: 100%;
-}
+  }

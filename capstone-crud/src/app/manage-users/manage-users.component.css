@@ -1,0 +1,272 @@
+/* Start of Main Table format */
+.container-manage-users {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.185);
+    font-size: 14px;
+    font-family: "Noto Sans", sans-serif;
+  }
+  
+  .mat-drawer-content {
+    height: 0;
+  }
+  
+  .container-manage-users .container-inside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    border: 1px solid #ccc;
+  }
+  /* End of Main Table format */
+  
+  /* Start of Main header format */
+  .container-manage-users .container-inside .card {
+    background-color: var(--darkest-color);
+  }
+  .container-manage-users .container-inside .card form {
+    width: 1000px;
+  }
+  
+  .header {
+    width: 100%;
+    background-color: var(--darkest-color);
+  }
+  
+  .container-manage-users .container-inside .card p {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0px 0px 0px 20px;
+  }
+  
+  p mat-icon {
+    padding-right: 10px;
+  }
+  
+  /* End of Header Table format */
+  
+  /* Start of Table format */
+  .container-manage-users .container-inside .container-table {
+    border-spacing: 0;
+    width: 100%;
+    padding: 0px 0px;
+  }
+  
+  .container-manage-users .container-inside .container-table table {
+    width: 100%;
+    padding: 0px 20px;
+    border-spacing: 0px 10px;
+  }
+  
+  .container-manage-users .container-inside .container-table table th {
+    color: var(--background-color);
+    font-weight: 500;
+    padding: 10px 10px;
+    margin: 50px 0px;
+    background-color: #660066;
+  }
+  
+  .container-manage-users .container-inside .container-table table td {
+    padding: 10px 20px;
+    text-align: center;
+    background-color: white;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.185);
+    font-weight: 400;
+    color: #5e5e5e;
+  }
+  
+  .container-manage-users .container-inside .container-table table tr:hover {
+    background-color: var(--lightest-color);
+  }
+  
+  /* End of Table format */
+  
+  /* Start of Table button format */
+  .container-manage-users .container-inside .container-table table td select {
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    color: black;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px 2px;
+  }
+  
+  .container-manage-users
+    .container-inside
+    .container-table
+    table
+    td.table-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container-manage-users
+    .container-inside
+    .container-table
+    table
+    td.table-button
+    button {
+    padding: 3px 10px;
+    border-style: none;
+    background-color: var(--editbutton-color);
+    color: var(--graydarkest-color);
+    border-radius: 4px;
+    transition: 0.5s;
+    cursor: pointer;
+    color: White;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .container-manage-users
+    .container-inside
+    .container-table
+    table
+    td.table-button
+    button
+    mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+  }
+  
+  .container-manage-users
+    .container-inside
+    .container-table
+    table
+    td.table-button
+    button:nth-child(2) {
+    background-color: var(--deletebutton-color);
+    border-style: none;
+    color: white;
+    margin-left: 5px;
+  }
+  
+  .container-manage-users
+    .container-inside
+    .container-table
+    table
+    td.table-button
+    button:nth-child(2):hover {
+    background-color: var(--reddarkest-color);
+  }
+  
+  .container-manage-users
+    .container-inside
+    .container-table
+    table
+    td.table-button
+    button:hover {
+    transform: translateY(-3px);
+    background-color: var(--editbuttonh-color);
+  }
+  
+  button {
+    padding: 5px 20px;
+    border-style: none;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+    transition: 0.5s;
+  }
+  
+  button:hover {
+    transform: translateY(-3px);
+  }
+  
+  button.active {
+    background-color: #509156;
+  }
+  
+  button.inactive {
+    background-color: rgb(143, 143, 143);
+    color: #c9c9c9;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Start of Pagination Format */
+  .table-pagination-outer {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    margin: 0px 20px 20px 20px;
+    background: var(--darkest-color);
+    height: 35px;
+  }
+  
+  .table-pagination-inner {
+    grid-column: 2;
+    height: 40px;
+    margin-top: -9px;
+  }
+  
+  .table-pagination-inner ::ng-deep .ngx-pagination .current {
+    background: white;
+    color: var(--graydarkest-color);
+  }
+  
+  .table-pagination-inner ::ng-deep .ngx-pagination a {
+    color: #ccc;
+  }
+  
+  .table-pagination-inner ::ng-deep .ngx-pagination a:hover {
+    color: var(--graydarkest-color);
+  }
+  /* End of Pagination format */
+  .loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(
+      119,
+      119,
+      119,
+      0.6
+    ); /* Adjust the background color and opacity */
+    z-index: -0;
+    margin-top: 120px;
+    margin-left: 100px;
+  }
+  
+  .loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--normal-color); /* Loader color */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-top: -300px;
+    margin-left: -90px;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
