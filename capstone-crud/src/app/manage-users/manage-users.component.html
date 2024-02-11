@@ -34,7 +34,23 @@
             <td>{{ user.FirstName }}</td>
             <td>{{ user.StudentNum }}</td>
             <td>{{ user.UserName }}</td>
-            <td>{{ user.Password }}</td>
+            <td>
+              <ng-container *ngIf="!user.editingPassword; else editPassword">
+                {{ user.Password }}
+                <button type="button" (click)="toggleEditPassword(user)">
+                  Edit
+                </button>
+              </ng-container>
+              <ng-template #editPassword>
+                <input type="password" [(ngModel)]="user.Password" />
+                <button type="button" (click)="save()">
+                  Save
+                </button>
+                <button type="button" (click)="cancelEditPassword(user)">
+                  Cancel
+                </button>
+              </ng-template>
+            </td>
             <td>
               <select
                 [(ngModel)]="user.AccessLevelID"

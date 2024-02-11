@@ -6,9 +6,37 @@ const server = express();
 
 const nodemailer = require('nodemailer');
 
+server.use(bodyParser.json());
+const cors = require("cors");
 
+server.use(cors());
+// number of iterations or rounds for generating salt
+// const saltRounds = 10;
+
+// Established the database connection
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "inventorydb",
+});
+
+db.connect(function (error) {
+  if (error) console.log("Error Connecting to DB");
+  else console.log("Successfully Connected to DB");
+});
+server.use(cors({
+    origin: 'http://localhost:4200',
+    methods: 'POST',
+}));
+
+// Establish the Port
+server.listen(8085, function check(error) {
+  if (error) console.log("Error...");
+  else console.log("Started... 8085");
+});
 // const bcrypt = require("bcrypt");
-
+// -----------------------------------------
 // EMAIL FUNCTION
 // Define your route for sending emails
 server.use(express.json());
@@ -51,34 +79,7 @@ server.post('/send-email', (req, res) => {
 // -----------------------------
 
 
-server.use(bodyParser.json());
-const cors = require("cors");
 
-server.use(cors());
-// number of iterations or rounds for generating salt
-// const saltRounds = 10;
-
-// Established the database connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "inventorydb",
-});
-
-db.connect(function (error) {
-  if (error) console.log("Error Connecting to DB");
-  else console.log("Successfully Connected to DB");
-});
-server.use(cors({
-    origin: 'http://localhost:4200'
-}));
-
-// Establish the Port
-server.listen(8085, function check(error) {
-  if (error) console.log("Error...");
-  else console.log("Started... 8085");
-});
 //------------------------------------------- API FOR COURSES ------------------------------------------------
 server.get("/api/courses", (req, res) =>{
     var sql = "SELECT * FROM tblCourses";
@@ -199,7 +200,7 @@ server.put("/api/equipments/update/:id", (req, res) => {
     req.body.Quantity +
     "', CourseID='" +
     req.body.CourseID +
-    "', CalibrationSchedule=?'" +
+    "', CalibrationSchedule='" +
     req.body.CalibrationSchedule + // Ensure the received date is properly formatted
     "' WHERE EquipmentID=" +
     req.params.id;

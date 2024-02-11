@@ -49,6 +49,9 @@ export class ManageUsersComponent {
         this.isResultLoaded = true;
         console.log(resultData.data);
         this.users = resultData.data;
+        this.users.forEach(user => {
+          user.editingPassword = false;
+        });
       });
   }
 
@@ -101,11 +104,30 @@ export class ManageUsersComponent {
       });
   }
 
+  toggleEditPassword(user: any) {
+    user.editingPassword = !user.editingPassword;
+  }
+  
+
+  // save() {
+  //   if (this.currentUser.AccountID == '') {
+  //     this.addUser();
+  //   } else {
+  //     this.UpdateRecords(this.currentUser);
+  //   }
+  // }
   save() {
-    if (this.currentUser.AccountID == '') {
-      this.addUser();
+    // Check if the password editing mode is enabled
+    if (!this.currentUser.editingPassword) {
+      // Password editing mode is not enabled, proceed with saving
+      if (this.currentUser.AccountID == '') {
+        this.addUser();
+      } else {
+        this.UpdateRecords(this.currentUser);
+      }
     } else {
-      this.UpdateRecords(this.currentUser);
+      // Password editing mode is enabled, do not save
+      console.log("Cannot save while editing password.");
     }
   }
 
@@ -152,5 +174,12 @@ export class ManageUsersComponent {
   }
   updateAccessLevel(currentUser: any) {
     this.UpdateRecords(currentUser); // Call your existing method to update the user's record
+  }
+
+  cancelEditPassword(user: any) {
+    // Reset the user's password to its original value
+    user.Password = this.users.find(u => u.AccountID === user.AccountID)?.Password;
+    // Set editingPassword back to false to exit editing mode
+    user.editingPassword = false;
   }
 }
