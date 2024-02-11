@@ -197,7 +197,7 @@ server.put("/api/equipments/update/:id", (req, res) => {
     req.body.Quantity +
     "', CourseID='" +
     req.body.CourseID +
-    "', CalibrationSchedule='" +
+    "', CalibrationSchedule=?'" +
     req.body.CalibrationSchedule + // Ensure the received date is properly formatted
     "' WHERE EquipmentID=" +
     req.params.id;

@@ -37,7 +37,7 @@
     <div *ngIf="!isEditMode">
       <p><strong>Last Name:</strong> {{ this.currentUser?.LastName }}</p> 
       <p><strong>First Name:</strong> {{ currentUser?.FirstName }}</p> 
-      <p><strong>Birthdate:</strong> {{ currentUser?.Birthdate | date: 'dd-MM-yyyy' }}</p> 
+      <p><strong>Birthdate:</strong> {{ currentUser?.Birthdate | date: 'yyyy-MM-dd' }}</p> 
       <p><strong>Student Number:</strong> {{ currentUser?.StudentNum }}</p> 
       <p><strong>Username:</strong> {{ currentUser?.UserName }}</p> 
       <p><strong>Password:</strong> {{ currentUser?.Password }}</p> 

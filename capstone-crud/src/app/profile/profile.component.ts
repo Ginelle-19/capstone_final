@@ -118,7 +118,9 @@ export class ProfileComponent implements OnInit {
   setUpdate(currentUser: any) {
     this.LastName = currentUser.LastName;
     this.FirstName = currentUser.FirstName;
-    this.Birthdate = this.datePipe.transform(currentUser.Birthdate, 'dd-MM-yyyy') || '';
+    const birthdateDate = new Date(currentUser.Birthdate);
+    this.Birthdate = this.datePipe.transform(birthdateDate, 'yyyy-MM-dd') || '';
+  
     this.StudentNum = currentUser.StudentNum;
     this.UserName = currentUser.UserName;
     this.Password = currentUser.Password;
@@ -172,7 +174,7 @@ export class ProfileComponent implements OnInit {
         // Update the input fields with the fetched data
         this.LastName = userData.LastName || '';
         this.FirstName = userData.FirstName || '';
-        this.Birthdate = this.datePipe.transform(userData.Birthdate, 'dd-MM-yyyy') || '';
+        this.Birthdate = this.datePipe.transform(userData.Birthdate, 'yyyy-MM-dd') || '';
         this.StudentNum = userData.StudentNum || '';
         this.UserName = userData.UserName || '';
         this.Password = userData.Password || '';

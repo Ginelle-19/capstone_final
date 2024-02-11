@@ -39,7 +39,7 @@ export class EquipmentCrudComponent {
   EquipmentName : string = "";
   Quantity : string = "";
   CourseID! : number;
-  CalibrationSchedule : Date = new Date;
+  CalibrationSchedule: Date | null = null;
 
   minDate: string;
 
@@ -94,22 +94,31 @@ export class EquipmentCrudComponent {
     this.currentID = data.EquipmentID;
   }
 
-  UpdateRecords(){
-    let bodyData = {
-      "EquipmentName" : this.EquipmentName,
-      "Quantity" : this.Quantity,
-      "CalibrationSchedule" : this.datePipe.transform(this.CalibrationSchedule, 'yyyy-MM-dd'),
-      "CourseID" : this.CourseID
-
+  UpdateRecords() {
+    let bodyData: any = {
+      "EquipmentName": this.EquipmentName,
+      "Quantity": this.Quantity,
+      "CourseID": this.CourseID
     };
 
+    if (this.CalibrationSchedule instanceof Date) {
+      bodyData.CalibrationSchedule = this.datePipe.transform(this.CalibrationSchedule, 'yyyy-MM-dd');
+    } else if (this.CalibrationSchedule === null || this.datePipe.transform(this.CalibrationSchedule, 'yyyy-MM-dd') === '0000-00-00') {
+      bodyData.CalibrationSchedule = '';
+    } else {
+      bodyData.CalibrationSchedule = null;
+    }
+
     this.http.put("http://localhost:8085/api/equipments/update" + "/" + this.currentID, bodyData)
-    .subscribe((resultData: any) =>{
-      console.log(resultData);
-      alert("Equipment Updated Successfully!")
-      this.getAllEquipments();
-    });
+      .subscribe((resultData: any) => {
+        console.log(resultData);
+        alert("Equipment Updated Successfully!")
+        this.getAllEquipments();
+      });
   }
+  
+  
+  
 
   save(){
     if(this.currentID == ''){
