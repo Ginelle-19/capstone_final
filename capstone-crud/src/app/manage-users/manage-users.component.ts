@@ -35,6 +35,7 @@ export class ManageUsersComponent {
     StudentNum: '',
     AccessLevelID: '',
     isActive: false,
+    AccountID: '' // Initialize AccountID here
   };
 
   constructor(private http: HttpClient) {
@@ -49,9 +50,6 @@ export class ManageUsersComponent {
         this.isResultLoaded = true;
         console.log(resultData.data);
         this.users = resultData.data;
-        this.users.forEach(user => {
-          user.editingPassword = false;
-        });
       });
   }
 
@@ -64,6 +62,7 @@ export class ManageUsersComponent {
         this.getAllUsers();
       });
   }
+
   setUpdate(user: any) {
     // Set currentUser to the selected user for editing
     this.currentUser = { ...user }; // Copy user object to prevent reference mutation
@@ -80,6 +79,7 @@ export class ManageUsersComponent {
       );
     }
   }
+
   UpdateRecords(currentUser: any) {
     let bodyData = {
       UserName: currentUser.UserName,
@@ -94,7 +94,7 @@ export class ManageUsersComponent {
 
     this.http
       .put(
-        'http://localhost:8085/api/users/update' + '/' + currentUser.AccountID,
+        `http://localhost:8085/api/users/update/${currentUser.AccountID}`,
         bodyData
       )
       .subscribe((resultData: any) => {
@@ -104,36 +104,17 @@ export class ManageUsersComponent {
       });
   }
 
-  toggleEditPassword(user: any) {
-    user.editingPassword = !user.editingPassword;
-  }
-  
-
-  // save() {
-  //   if (this.currentUser.AccountID == '') {
-  //     this.addUser();
-  //   } else {
-  //     this.UpdateRecords(this.currentUser);
-  //   }
-  // }
   save() {
-    // Check if the password editing mode is enabled
-    if (!this.currentUser.editingPassword) {
-      // Password editing mode is not enabled, proceed with saving
-      if (this.currentUser.AccountID == '') {
-        this.addUser();
-      } else {
-        this.UpdateRecords(this.currentUser);
-      }
+    if (!this.currentUser.AccountID) {
+      this.addUser();
     } else {
-      // Password editing mode is enabled, do not save
-      console.log("Cannot save while editing password.");
+      this.UpdateRecords(this.currentUser);
     }
   }
 
   deleteUser(user: any) {
     this.http
-      .delete('http://localhost:8085/api/users/delete/' + user.AccountID)
+      .delete(`http://localhost:8085/api/users/delete/${user.AccountID}`)
       .subscribe(
         () => {
           console.log('User Deleted Successfully!');
@@ -160,9 +141,11 @@ export class ManageUsersComponent {
       Birthdate: '',
       StudentNum: '',
       isActive: false,
+      AccountID: '' // Reset AccountID when cancelling update
     };
     this.isUpdateFormActive = false;
   }
+
   loadAccessLevels() {
     this.http
       .get('http://localhost:8085/api/access')
@@ -172,14 +155,8 @@ export class ManageUsersComponent {
         this.AccessLevels = resultData.data;
       });
   }
+
   updateAccessLevel(currentUser: any) {
     this.UpdateRecords(currentUser); // Call your existing method to update the user's record
-  }
-
-  cancelEditPassword(user: any) {
-    // Reset the user's password to its original value
-    user.Password = this.users.find(u => u.AccountID === user.AccountID)?.Password;
-    // Set editingPassword back to false to exit editing mode
-    user.editingPassword = false;
   }
 }

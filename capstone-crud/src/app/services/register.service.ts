@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +32,9 @@ export class RegisterService {
     );
   }
 
-  checkStudentNumber(studentNum: number): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrl}/api/users/check/${studentNum}`).pipe(
+  checkStudentNumber(StudentNum: number): Observable<boolean> {
+    return this.http.get<{ status: boolean, isRegistered: boolean }>(`${this.apiUrl}/api/users/check/${StudentNum}`).pipe(
+      map(response => response.isRegistered), // Extracting only the isRegistered property
       catchError((error) => {
         console.error('Error checking student number:', error);
         return throwError('Something went wrong. Please try again later.');
