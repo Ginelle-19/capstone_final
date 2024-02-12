@@ -277,20 +277,21 @@ server.put("/api/consumables/update/:id", (req, res) => {
     req.body.Quantity +
     "', CourseID='" +
     req.body.CourseID +
-    "', ExpirationDate='" +
-    req.body.ExpirationDate +
-    "' WHERE ConsumableID=" +
+    "', ExpirationDate=" +
+    (req.body.ExpirationDate ? "'" + req.body.ExpirationDate + "'" : "NULL") +
+    " WHERE ConsumableID=" +
     req.params.id;
 
     let a = db.query(sql, (error, result) => {
         if (error) {
-            console.error("Error updating course:", error);
+            console.error("Error updating consumable:", error);
             res.send({ status: false, message: "Consumable Update Failed!" });
         } else {
             res.send({ status: true, message: "Consumable Update Success!" });
         }        
     });
 });
+
 // DELETE A RECORD
 server.delete("/api/consumables/delete/:id", (req, res) => {
     let sql = "DELETE FROM tblConsumable where ConsumableID=" + req.params.id + "";
