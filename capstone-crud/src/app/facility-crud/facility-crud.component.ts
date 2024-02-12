@@ -27,7 +27,7 @@ export class FacilityCrudComponent {
   RoomName: string = '';
   RoomDesc: string = '';
   RoomStatus!: number;
-  RoomID!: '';
+  RoomID: string | null = null;
   currentRoom: any;
 
   p: number = 1;
@@ -51,7 +51,7 @@ export class FacilityCrudComponent {
     let bodyData = {
       RoomName: this.RoomName,
       RoomDesc: this.RoomDesc,
-      RoomStatus: this.RoomStatus,
+      // RoomStatus: this.RoomStatus,
     };
 
     this.http
@@ -101,9 +101,22 @@ export class FacilityCrudComponent {
     }
   }
 
+  // save() {
+  //   if (this.RoomID && this.RoomID !== '') {
+  //     // Construct an object with the necessary room data
+  //     const roomData = {
+  //       RoomName: this.RoomName,
+  //       RoomDesc: this.RoomDesc,
+  //       RoomStatus: this.RoomStatus,
+  //       RoomID: this.RoomID,
+  //     };
+  //     this.UpdateRecords(roomData);
+  //   } else {
+  //     this.addRooms();
+  //   }
+  // }
   save() {
-    if (this.RoomID && this.RoomID !== '') {
-      // Construct an object with the necessary room data
+    if (this.RoomID) { // Check if RoomID is not null or undefined
       const roomData = {
         RoomName: this.RoomName,
         RoomDesc: this.RoomDesc,

@@ -200,9 +200,9 @@ server.put("/api/equipments/update/:id", (req, res) => {
     req.body.Quantity +
     "', CourseID='" +
     req.body.CourseID +
-    "', CalibrationSchedule='" +
-    req.body.CalibrationSchedule + // Ensure the received date is properly formatted
-    "' WHERE EquipmentID=" +
+    "', CalibrationSchedule=" +
+    (req.body.CalibrationSchedule ? "'" + req.body.CalibrationSchedule + "'" : "NULL") + // Ensure the received date is properly formatted
+    " WHERE EquipmentID=" +
     req.params.id;
     let a = db.query(sql, (error, result) => {
         if (error) {
@@ -578,7 +578,7 @@ server.post("/api/room/add", (req, res) => {
         RoomID: req.body.RoomID,
         RoomName: req.body.RoomName,
         RoomDesc: req.body.RoomDesc,
-        RoomStatus: req.body.RoomStatus
+        // RoomStatus: req.body.RoomStatus
     };
     let sql = "INSERT INTO tblRooms SET ?";
     db.query(sql, details, (error) => {

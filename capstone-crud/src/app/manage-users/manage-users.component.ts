@@ -66,12 +66,14 @@ export class ManageUsersComponent {
   setUpdate(user: any) {
     // Set currentUser to the selected user for editing
     this.currentUser = { ...user }; // Copy user object to prevent reference mutation
+    this.currentUser.AccountID = user.AccountID;
     this.isUpdateFormActive = true;
   }
 
   toggleActive(currentUser: any) {
     if (currentUser && currentUser.isActive !== undefined) {
       currentUser.isActive = currentUser.isActive === 1 ? 0 : 1; // Toggle isActive value
+      currentUser.AccountID = currentUser.AccountID;
       this.UpdateRecords(currentUser); // Update the record with the new isActive value
     } else {
       console.error(
@@ -104,11 +106,11 @@ export class ManageUsersComponent {
       });
   }
 
-  save() {
-    if (!this.currentUser.AccountID) {
+  save(user: any) {
+    if (!user.AccountID) {
       this.addUser();
     } else {
-      this.UpdateRecords(this.currentUser);
+      this.UpdateRecords(user);
     }
   }
 
@@ -129,6 +131,7 @@ export class ManageUsersComponent {
 
   setCurrentUser(user: any) {
     this.currentUser = { ...user }; // copy user object to prevent reference mutation
+    this.currentUser.AccountID = user.AccountID;
     this.isUpdateFormActive = true;
   }
 
