@@ -188,7 +188,7 @@
   import { DataService } from '../data.service';
   import { Observable, of, throwError } from 'rxjs';
   import { catchError, map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+  import { HttpClient } from '@angular/common/http';
   
   @Injectable({
     providedIn: 'root'
@@ -232,8 +232,11 @@ import { HttpClient } from '@angular/common/http';
     }
     
     logout(): void {
-      this.currentUser = null;
-      this.isAuthenticated = false; // Clear currentUser and isAuthenticated on logout
+      const confirmLogout = confirm('Are you sure you want to log out?');
+      if (confirmLogout) {
+        this.currentUser = null;
+        this.isAuthenticated = false; // Clear currentUser and isAuthenticated on logout
+      }
     }
   
    getCurrentUser(AccountID?: number): Observable<any> {
@@ -290,6 +293,26 @@ import { HttpClient } from '@angular/common/http';
       // Update the currentUser property with the updated user data
       this.currentUser = { ...this.currentUser, ...updatedUserData };
     }
+
+    private beforeUnloadListener: EventListenerOrEventListenerObject | null = null;
+confirmLogoutOnRefresh(): void {
+  this.beforeUnloadListener = (event: BeforeUnloadEvent) => {
+    // Prompt the user with a confirmation dialog
+    const confirmationMessage = 'Are you sure you want to refresh? You will be logged out.';
+    (event || window.event).returnValue = confirmationMessage;
+    return confirmationMessage;
+  };
+  window.addEventListener('beforeunload', this.beforeUnloadListener);
+}
+
+// Call this method to remove the event listener
+removeLogoutConfirmation(): void {
+  if (this.beforeUnloadListener) {
+    window.removeEventListener('beforeunload', this.beforeUnloadListener);
+    this.beforeUnloadListener = null;
+  }
+}
+    
   }
   
 
