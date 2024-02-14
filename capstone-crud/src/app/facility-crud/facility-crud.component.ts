@@ -130,17 +130,23 @@ export class FacilityCrudComponent {
   }
 
   deleteRoom(room: any) {
-    this.http
-      .delete('http://localhost:8085/api/room/delete/' + room.RoomID)
-      .subscribe(
-        () => {
-          console.log('Room Deleted Successfully!');
-          this.getAllRooms();
-        },
-        (error) => {
-          console.error('Error deleting room:', error);
-          alert('Failed to delete room. Please try again later.');
-        }
-      );
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this record?'
+    );
+
+    if (confirmation) {
+      this.http
+        .delete('http://localhost:8085/api/room/delete/' + room.RoomID)
+        .subscribe(
+          (resultData: any) => {
+            alert('Record Deleted');
+            this.getAllRooms();
+          },
+          (error) => {
+            console.error('Error deleting room:', error);
+            alert('Failed to delete room. Please try again later.');
+          }
+        );
+    }
   }
 }

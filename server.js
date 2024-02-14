@@ -346,6 +346,24 @@ server.get("/api/users/check/:studentNum", (req, res) =>{
     });
 });
 
+server.get("/api/users/search/:studentNum", (req, res) =>{
+    var studentNum = req.params.studentNum;
+    var sql = "SELECT * FROM tblAccount WHERE StudentNum='" + studentNum + "'";
+    db.query(sql, function(error, result){
+        if (error){
+            console.log("Error Searching Student Number")
+            res.status(500).send({ status: false, message: "Error searching student number" });
+        } else{
+            if(result.length > 0){
+                res.send({ status: true, user: result[0] });
+            } else{
+                res.send({ status: true, message: "User not found" });
+            }
+        }
+    });
+});
+
+
 //ADD USERS
 server.post("/api/users/add", (req, res) => {
     let details = {

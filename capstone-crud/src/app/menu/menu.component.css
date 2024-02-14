@@ -17,14 +17,14 @@
 .mat-toolbar img {
   height: 80px;
   width: 80px;
-  object-fit: contain; /* Ensure the image fits within the container */
+  object-fit: contain;
 }
 
 .title-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center; /* Center text horizontally */
+  text-align: center;
 }
 
 .custom-toolbar {
@@ -136,7 +136,6 @@ mat-icon {
 
 .sidenav-container .itemlink:hover {
   background-color: #e2bce2;
-
 }
 
 .sidenav-container .list-last-main {
@@ -153,7 +152,6 @@ mat-icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 10px;
   border-radius: 12px;
   margin-top: -130px;
   height: 50px;
@@ -165,17 +163,17 @@ mat-icon {
 }
 
 .sidenav-container .list-last-main .list-last a {
-  color: black;
+  padding: 5px 10px;
 }
 
 .sidenav-container .list-last-main .list-last mat-icon {
-  color: black;
+  color: var(--darkest-color);
 }
 
 .mdc-list-item {
   display: flex;
   align-items: center;
-  padding: 15px 8px;
+  padding: 40px 8px;
   cursor: pointer;
 }
 
@@ -184,14 +182,5 @@ mat-icon {
   justify-content: center;
   align-items: center;
 }
-.mdc-list-item {
-  display: flex;
-  /* position: relative; */
-  align-items: center;
-  /* justify-content: space-between; */
-  /* overflow: hidden; */
-  padding: 40px 8px;
-  /* align-items: stretch; */
-  cursor: pointer;
-}
+
 /* ------------- */

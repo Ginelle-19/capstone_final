@@ -8,8 +8,15 @@
           >Consumable Reports
         </p>
       </div>
+      <!-- Loader -->
       <div class="loader-container" *ngIf="!isResultLoaded">
-        <div class="loader"></div>
+        <div class="loader">
+          <label
+            >Sorry, we're having trouble loading the database. Try reloading the
+            page.</label
+          >
+          <div class="loading"></div>
+        </div>
       </div>
       <form>
         <div class="container-form-group">
@@ -108,11 +115,9 @@
             <th scope="col">Quantity</th>
             <th scope="col">Date Created</th>
             <th scope="col">Actions</th>
-            <!-- <th scope="col">Date Returned</th>  -->
           </tr>
         </thead>
         <tbody>
-          <!-- | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: ConsumableArray.length } -->
           <tr
             *ngFor="
               let TransactionItem of TransactionArray
@@ -133,7 +138,7 @@
             </td>
             <td>{{ TransactionItem.Quantity }}</td>
             <td>{{ TransactionItem.DateCreated | date : "yyyy-MM-dd" }}</td>
-            <!-- <td>{{ TransactionItem.DateReturned | date: 'yyyy-MM-dd'}}</td> -->
+
             <td class="table-button">
               <button
                 type="button"

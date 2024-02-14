@@ -60,7 +60,7 @@ export class LoginComponent {
             alert('Welcome ' + user.FirstName + '. You are logged in.');
             switch (user.AccessLevelID) {
               case 1: // Student
-                this.router.navigate(['/user-menu/user-courses']);
+                this.router.navigate(['/user-menu/user-profile']);
                 break;
               case 2: // Super Admin
                 this.router.navigate(['/menu/profile']);

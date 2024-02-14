@@ -38,6 +38,9 @@ export class ManageUsersComponent {
     AccountID: '' // Initialize AccountID here
   };
 
+  searchStudentNum: string = '';
+  filteredUsers: any[] = [];
+
   constructor(private http: HttpClient) {
     this.getAllUsers();
     this.loadAccessLevels();
@@ -115,18 +118,27 @@ export class ManageUsersComponent {
   }
 
   deleteUser(user: any) {
-    this.http
-      .delete(`http://localhost:8085/api/users/delete/${user.AccountID}`)
-      .subscribe(
-        () => {
-          console.log('User Deleted Successfully!');
-          this.getAllUsers(); // Update the user list after deletion
-        },
-        (error) => {
-          console.error('Error deleting user:', error);
-          alert('Failed to delete user. Please try again later.');
-        }
-      );
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this record?'
+    );
+
+    if (confirmation) {
+      this.http
+        .delete(
+          'http://localhost:8085/api/users/delete' +
+            '/' +
+            user.AccountID
+        )
+        .subscribe(
+          (resultData: any) => {
+            alert('Record Deleted');
+            this.getAllUsers();
+          },
+          (error) => {
+            console.error('Error deleting record: ', error);
+          }
+        );
+    }
   }
 
   setCurrentUser(user: any) {
@@ -161,5 +173,34 @@ export class ManageUsersComponent {
 
   updateAccessLevel(currentUser: any) {
     this.UpdateRecords(currentUser); // Call your existing method to update the user's record
+  }
+
+  searchUserByStudentNum() {
+    if (this.searchStudentNum.trim() !== '') {
+      const searchTerm = this.searchStudentNum.trim();
+      this.http.get(`http://localhost:8085/api/users/search/${searchTerm}`)
+        .subscribe((resultData: any) => {
+          if (resultData.status && resultData.user) {
+            // Update the filteredUsers array with the search result
+            this.filteredUsers = [resultData.user];
+          } else {
+            alert(resultData.message);
+            this.filteredUsers = []; // Clear the filtered users array if no user found
+          }
+          // Reset pagination to display the searched user if found
+          this.p = 1;
+        }, (error) => {
+          console.error('Error searching user by StudentNum:', error);
+          alert('Error searching user by StudentNum. Please try again later.');
+        });
+    } else {
+      alert('Please enter a Student Number to search.');
+    }
+  }
+
+  clearSearch() {
+    this.searchStudentNum = ''; // Clear the search input
+    this.filteredUsers = []; // Clear the filtered users array
+    this.p = 1; // Reset pagination to the first page
   }
 }

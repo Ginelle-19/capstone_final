@@ -5,28 +5,28 @@ import { RouterModule } from '@angular/router';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
-  selector: 'app-user-course',
+  selector: 'app-user-facility',
   standalone: true,
   imports: [CommonModule, RouterModule, NgxPaginationModule],
-  templateUrl: './user-course.component.html',
-  styleUrl: './user-course.component.css',
+  templateUrl: './user-facility.component.html',
+  styleUrl: './user-facility.component.css',
 })
-export class UserCourseComponent {
-  CourseArray: any[] = [];
+export class UserFacilityComponent {
+  FacilityArray: any[] = [];
+  RoomsArray: any[] = [];
   isResultLoaded = false;
   p: number = 1;
   itemsPerPage: number = 10;
   constructor(private http: HttpClient) {
-    this.getAllCourses();
+    this.getAllFacilities();
   }
 
-  getAllCourses() {
+  getAllFacilities() {
     this.http
-      .get('http://localhost:8085/api/courses')
+      .get('http://localhost:8085/api/room')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
-
-        this.CourseArray = resultData.data;
+        this.RoomsArray = resultData.data;
       });
   }
 }

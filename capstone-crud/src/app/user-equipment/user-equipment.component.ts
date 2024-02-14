@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { HttpClient } from '@angular/common/http';
@@ -9,35 +9,31 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-user-equipment',
   standalone: true,
-  imports: [
-
-    NgxPaginationModule,
-    FormsModule,
-    CommonModule,
-    RouterModule
-  ],
+  imports: [NgxPaginationModule, FormsModule, CommonModule, RouterModule],
   templateUrl: './user-equipment.component.html',
-  styleUrl: './user-equipment.component.css'
+  styleUrl: './user-equipment.component.css',
 })
 export class UserEquipmentComponent {
-
   EquipmentArray: any[] = [];
   CourseArray: any[] = [];
 
-  
-  // currentID = "";
-  EquipmentName : string = "";
-  Quantity : string = "";
-  CourseID! : number;
+  EquipmentName: string = '';
+  Quantity: string = '';
+  CourseID!: number;
 
   SelectedCourseID: number | null = null;
-
+  searchValue: string = '';
+  searchResult: any[] = [];
   isResultLoaded = false;
 
-  p:number = 1;
+  p: number = 1;
   itemsPerPage: number = 10;
 
-  constructor(private http: HttpClient, private dataService: DataService) {
+  constructor(
+    private http: HttpClient,
+    private dataService: DataService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.getAllEquipments();
   }
 
@@ -46,31 +42,47 @@ export class UserEquipmentComponent {
   }
 
   getAllEquipments() {
-    this.http.get("http://localhost:8085/api/equipments/")
+    this.http
+      .get('http://localhost:8085/api/equipments/')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
-        console.log(resultData.data);
-        // Only retrieve EquipmentName and Quantity
-        this.EquipmentArray = resultData.data.map((item: any) => ({ EquipmentName: item.EquipmentName, Quantity: item.Quantity }));
+
+        this.EquipmentArray = resultData.data.map((item: any) => ({
+          EquipmentName: item.EquipmentName,
+          Quantity: item.Quantity,
+        }));
       });
   }
 
   filterEquipments(): void {
     if (this.SelectedCourseID !== null) {
-      this.dataService.getEquipmentsByCourseId(this.SelectedCourseID)
-        .subscribe((response: any) => {
-          console.log(response);
-          // Only retrieve EquipmentName and Quantity
-          this.EquipmentArray = response.data.map((item: any) => ({ EquipmentName: item.EquipmentName, Quantity: item.Quantity }));
+      this.dataService.getEquipmentsByCourseId(this.SelectedCourseID).subscribe(
+        (response: any) => {
+          this.EquipmentArray = response.data;
         },
-          (error) => {
-            console.error('Error connecting to API: ', error);
-          }
-        );
+        (error) => {
+          console.error('Error connecting to API: ', error);
+        }
+      );
+    } else {
+      this.http.get('http://localhost:8085/api/equipments').subscribe(
+        (response: any) => {
+          this.EquipmentArray = response.data;
+        },
+        (error) => {
+          console.error('Error connecting to API: ', error);
+        }
+      );
     }
   }
 
-  // get courses for dropdown
+  clearFilter(): void {
+    this.SelectedCourseID = null;
+
+    this.changeDetectorRef.detectChanges();
+    this.filterEquipments();
+  }
+
   loadCourses(): void {
     this.dataService.getCourses().subscribe(
       (response: any) => {
@@ -81,5 +93,4 @@ export class UserEquipmentComponent {
       }
     );
   }
-
 }

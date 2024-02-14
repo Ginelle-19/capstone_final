@@ -110,13 +110,25 @@ export class CourseCrudComponent {
   }
 
   setDelete(data: any) {
-    this.http
-      .delete('http://localhost:8085/api/courses/delete' + '/' + data.CourseID)
-      .subscribe((resultData: any) => {
-        console.log(resultData);
-        alert('Record Deleted');
-        this.getAllCourses();
-      });
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this record?'
+    );
+
+    if (confirmation) {
+      this.http
+        .delete(
+          'http://localhost:8085/api/courses/delete' + '/' + data.CourseID
+        )
+        .subscribe(
+          (resultData: any) => {
+            alert('Record Deleted');
+            this.getAllCourses();
+          },
+          (error) => {
+            console.error('Error deleting record: ', error);
+          }
+        );
+    }
   }
 
   filterEquipments(): void {

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;800;900&display=swap");
-html,
+
 body {
   height: 100vh;
 }
@@ -12,6 +12,7 @@ body {
 }
 
 :root {
+  --darkest2-color: #4b004b;
   --darkest-color: #660066;
   --normal-color: #993399;
   --lightest-color: #e2bce2;
@@ -25,34 +26,6 @@ body {
   --deletebutton-color: #e33437;
   --green-color: #509156;
 }
-
-/*table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  tr:hover {
-    background-color: #e2bce2;
-  }
-  
-  caption {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-  }
-  
-*/
 
 @keyframes slideanimation2 {
   0% {

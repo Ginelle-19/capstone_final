@@ -1,72 +1,130 @@
-<!-- <div class="container">
-    <h2>User Profile</h2>
-    <div *ngIf="isResultLoaded">
-      <form (ngSubmit)="UpdateProfile()">
-        <div class="form-group">
-          <label for="LastName">Last Name:</label>
-          <input type="text" class="form-control" id="LastName" [(ngModel)]="LastName" name="LastName">
+<div class="container-profile">
+  <div class="container-inside">
+    <div class="card">
+      <form>
+        <div class="header">
+          <p>
+            <mat-icon fontIcon="manage_accounts" aria-hidden="false">
+            </mat-icon>
+            Profile Card
+          </p>
         </div>
-        <div class="form-group">
-          <label for="firstName">First Name:</label>
-          <input type="text" class="form-control" id="firstName" [(ngModel)]="FirstName" name="FirstName">
+        <!-- Loader -->
+        <div class="loader-container" *ngIf="!isResultLoaded">
+          <div class="loader">
+            <label
+              >Sorry, we're having trouble loading the database. Try reloading
+              the page.</label
+            >
+            <div class="loading"></div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="birthdate">Birthdate:</label>
-          <input type="date" class="form-control" id="birthdate" [(ngModel)]="Birthdate" name="Birthdate">
-        </div>
-        <div class="form-group">
-          <label for="studentNum">Student Number:</label>
-          <input type="text" class="form-control" id="studentNum" [(ngModel)]="StudentNum" name="StudentNum">
-        </div>
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input type="text" class="form-control" id="username" [(ngModel)]="UserName" name="UserName">
-        </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input type="password" class="form-control" id="password" [(ngModel)]="Password" name="Password">
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
       </form>
     </div>
-  </div>
-   -->
 
-   <div class="container">
-    <h2>User Profile</h2>
-    <div *ngIf="!isEditMode">
-      <p><strong>Last Name:</strong> {{ this.currentUser?.LastName }}</p> 
-      <p><strong>First Name:</strong> {{ currentUser?.FirstName }}</p> 
-      <p><strong>Birthdate:</strong> {{ currentUser?.Birthdate | date: 'yyyy-MM-dd' }}</p> 
-      <p><strong>Student Number:</strong> {{ currentUser?.StudentNum }}</p> 
-      <p><strong>Username:</strong> {{ currentUser?.UserName }}</p> 
-      <p><strong>Password:</strong> {{ currentUser?.Password }}</p> 
-      <button (click)="enterEditMode(currentUser)">Edit</button>
-    </div>
-    <div *ngIf="isEditMode">
-      <input type="text" [(ngModel)]="LastName"><br>
-      <input type="text" [(ngModel)]="FirstName"><br>
-      <input type="date" [(ngModel)]="Birthdate"><br>
-      <input type="text" [(ngModel)]="StudentNum"><br>
-      <input type="text" [(ngModel)]="UserName"><br>
-      <input type="text" [(ngModel)]="Password"><br>
-      <button (click)="UpdateProfile()">Save</button>
-      <button (click)="toggleEditMode()">Cancel</button>
+    <div class="profile-icon">
+      <img src="../assets/profileIcon.png" alt="profileIcon" />
+      <p>{{ this.currentUser?.LastName }}, {{ this.currentUser?.FirstName }}</p>
+      <p>{{ this.currentUser?.StudentNum }}</p>
     </div>
   </div>
-  
-  
+</div>
 
-  <!-- <div class="container" *ngIf="currentUser">
-  <h2>User Profile</h2>
-  <div>
-    <p><strong>Last Name:</strong> {{ currentUser?.LastName }}</p> 
-    <p><strong>First Name:</strong> {{ currentUser?.FirstName }}</p> 
-    <p><strong>Birthdate:</strong> {{ currentUser?.Birthdate }}</p> 
-    <p><strong>Student Number:</strong> {{ currentUser?.StudentNum }}</p> 
-    <p><strong>Username:</strong> {{ currentUser?.UserName }}</p> 
-    <p><strong>Password:</strong> {{ currentUser?.Password }}</p> 
-    <button (click)="toggleEditMode()">Edit</button>
+<div class="container-profile">
+  <div class="container-inside">
+    <div class="card">
+      <form>
+        <div class="header">
+          <p>
+            <mat-icon fontIcon="manage_accounts" aria-hidden="false">
+            </mat-icon>
+            User Information
+          </p>
+        </div>
+      </form>
+    </div>
+
+    <div class="container-holder">
+      <div class="main-holder" *ngIf="!isEditMode">
+        <div class="holderone">
+          <div class="section-holder">
+            <h4>Last Name</h4>
+            <p class="current-name">{{ this.currentUser?.LastName }}</p>
+          </div>
+          <div class="section-holder">
+            <h4>First Name</h4>
+            <p class="current-name">{{ currentUser?.FirstName }}</p>
+          </div>
+          <div class="section-holder">
+            <h4>Birthdate</h4>
+            <p class="current-name">
+              {{ currentUser?.Birthdate | date : "dd-MM-yyyy" }}
+            </p>
+          </div>
+        </div>
+
+        <div class="holdertwo">
+          <div class="section-holder">
+            <h4>Student Number</h4>
+            <p class="current-name">{{ currentUser?.StudentNum }}</p>
+          </div>
+          <div class="section-holder">
+            <h4>UserName</h4>
+            <p class="current-name">{{ currentUser?.UserName }}</p>
+          </div>
+          <div class="section-holder">
+            <h4>Password</h4>
+            <p class="current-name">*******</p>
+          </div>
+        </div>
+      </div>
+      <div class="button" *ngIf="!isEditMode">
+        <button (click)="enterEditMode(currentUser)">
+          <mat-icon fontIcon="edit" aria-hidden="false"> </mat-icon>Edit
+        </button>
+      </div>
+    </div>
+
+    <div class="container-holder">
+      <div class="main-holder" *ngIf="isEditMode">
+        <div class="holderone">
+          <div class="section-holder">
+            <h4>Last Name</h4>
+            <input type="text" [(ngModel)]="LastName" />
+          </div>
+          <div class="section-holder">
+            <h4>First Name</h4>
+            <input type="text" [(ngModel)]="FirstName" />
+          </div>
+          <div class="section-holder">
+            <h4>Birthdate</h4>
+            <input type="date" [(ngModel)]="Birthdate" />
+          </div>
+        </div>
+
+        <div class="holdertwo">
+          <div class="section-holder">
+            <h4>Student Number</h4>
+            <input type="text" [(ngModel)]="StudentNum" />
+          </div>
+          <div class="section-holder">
+            <h4>UserName</h4>
+            <input type="text" [(ngModel)]="UserName" />
+          </div>
+          <div class="section-holder">
+            <h4>Password</h4>
+            <input type="text" [(ngModel)]="Password" />
+          </div>
+        </div>
+      </div>
+      <div class="button" *ngIf="isEditMode">
+        <button (click)="UpdateProfile()">
+          <mat-icon fontIcon="save" aria-hidden="false"> </mat-icon>Save
+        </button>
+        <button (click)="toggleEditMode()">
+          <mat-icon fontIcon="cancel" aria-hidden="false"> </mat-icon>Cancel
+        </button>
+      </div>
+    </div>
   </div>
-</div> -->
-
+</div>

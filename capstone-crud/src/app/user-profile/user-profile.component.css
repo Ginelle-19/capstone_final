@@ -1,10 +1,10 @@
 /* Start of Main Table format */
-.container-course {
+.container-profile {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #f3f3f3;
+    background-color: var(--background-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.185);
     font-size: 14px;
     font-family: "Noto Sans", sans-serif;
@@ -14,7 +14,7 @@
     height: 0;
   }
   
-  .container-course .container-inside {
+  .container-profile .container-inside {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,8 +24,10 @@
   }
   /* End of Main Table format */
   
-  /* Start of Main header format */
-  .container-course .container-inside .card form {
+  .container-profile .container-inside .card {
+    background-color: var(--darkest-color);
+  }
+  .container-profile .container-inside .card form {
     width: 1000px;
   }
   
@@ -34,7 +36,7 @@
     background-color: var(--darkest-color);
   }
   
-  .container-course .container-inside .card p {
+  .container-profile .container-inside .card p {
     display: flex;
     align-items: center;
     padding: 10px;
@@ -47,76 +49,102 @@
   p mat-icon {
     padding-right: 10px;
   }
-  /* End of Header Table format */
   
-  /* Start of Table format */
-  .container-course .container-inside .container-table {
-    border-spacing: 0;
-    width: 100%;
-    padding: 0px 0px;
+  /* Profile Header */
+  .profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    padding: 30px 0px;
   }
   
-  .container-course .container-inside .container-table table {
-    width: 100%;
-    padding: 20px;
-    border-spacing: 0px 10px;
+  .profile-icon img {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40px;
   }
   
-  .container-course .container-inside .container-table table th {
-    color: var(--background-color);
-    font-weight: 500;
-    padding: 10px 10px;
-    margin: 50px 0px;
-    background-color: #660066;
-  }
-  
-  .container-course .container-inside .container-table table td {
-    padding: 10px 20px;
+  .profile-icon p {
     text-align: center;
-    background-color: white;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.185);
-    font-weight: 400;
-    color: #5e5e5e;
+    margin: 0;
   }
   
-  .container-course .container-inside .container-table table td:nth-child(1) {
-    font-weight: 700;
+  .profile-icon p:nth-child(3) {
+    padding-top: 10px;
   }
   
-  .container-course .container-inside .container-table table tr:hover {
-    background-color: var(--lightest-color);
-  }
-  /* End of Table format */
-  
-  /* Pagination Format */
-  .table-pagination-outer {
+  /* Profile Edit */
+  .main-holder {
+    padding: 20px;
     display: grid;
-    grid-template-columns: 1fr 280px;
-    margin: 0px 20px 20px 20px;
-    margin-top: -20px;
-    background: var(--darkest-color);
-    height: 35px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    column-gap: 10px;
   }
   
-  .table-pagination-inner {
+  p.current-name {
+    margin: 0;
+  }
+  
+  .main-holder .holderone {
+    grid-column: 1;
+  }
+  
+  .main-holder .holdertwo {
     grid-column: 2;
-    height: 40px;
-    margin-top: -9px;
   }
   
-  .table-pagination-inner ::ng-deep .ngx-pagination .current {
-    background: white;
-    color: var(--graydarkest-color);
+  p.current-name {
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
   }
   
-  .table-pagination-inner ::ng-deep .ngx-pagination a {
-    color: #ccc;
+  .button {
+    all: none;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 0px 20px 0px;
   }
   
-  .table-pagination-inner ::ng-deep .ngx-pagination a:hover {
-    color: var(--graydarkest-color);
+  button {
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--darkest-color);
+    border: none;
+    color: white;
+    border-radius: 4px;
   }
-  /* End of Pagination Format */
+  
+  button mat-icon {
+    color: white;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  input {
+    background-color: white;
+    width: 463px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+  }
+  
+  button:nth-child(2) {
+    margin-left: 5px;
+  }
   
   .loader-container {
     display: flex;
@@ -153,11 +181,6 @@
     box-shadow: 2px 2px 10px -5px lightgrey;
     margin-top: -180px;
     margin-left: -90px;
-    label {
-      color: #002;
-      font-size: 15px;
-      animation: bit 0.6s alternate infinite;
-    }
   }
   .loading {
     width: 100%;
@@ -177,6 +200,11 @@
     border-radius: 10px;
     z-index: 1;
     animation: loading 0.6s alternate infinite;
+  }
+  label {
+    color: #002;
+    font-size: 15px;
+    animation: bit 0.6s alternate infinite;
   }
   
   @keyframes bit {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import { FormsModule } from '@angular/forms';
@@ -6,34 +6,34 @@ import { Data, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DataService } from '../data.service';
-// import { EquipmentCrudComponent } from '../equipment-crud/equipment-crud.component';
-// import { CourseCrudComponent } from '../course-crud/course-crud.component';
 
 @Component({
   selector: 'app-user-consumable',
   standalone: true,
   imports: [FormsModule, RouterModule, CommonModule, NgxPaginationModule],
   templateUrl: './user-consumable.component.html',
-  styleUrl: './user-consumable.component.css'
+  styleUrl: './user-consumable.component.css',
 })
 export class UserConsumableComponent {
-
   ConsumableArray: any[] = [];
   CourseArray: any[] = [];
 
   isResultLoaded = false;
-  currentID = "";
-  ConsumableName: string = "";
+  currentID = '';
+  ConsumableName: string = '';
   Quantity?: number;
-  ConsumableStat: string = "";
-  // ExpirationDate: string = "";
+  ConsumableStat: string = '';
 
   SelectedCourseID: number | null = null;
 
-  p:number = 1;
-  itemsPerPage: number = 10;
+  p: number = 1;
+  itemsPerPage: number = 9;
 
-  constructor(private http: HttpClient, private dataService:DataService) {
+  constructor(
+    private http: HttpClient,
+    private dataService: DataService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.getAllConsumables();
   }
 
@@ -42,10 +42,11 @@ export class UserConsumableComponent {
   }
 
   getAllConsumables() {
-    this.http.get("http://localhost:8085/api/consumables")
+    this.http
+      .get('http://localhost:8085/api/consumables')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
-        console.log(resultData.data);
+
         this.ConsumableArray = resultData.data;
       });
   }
@@ -53,7 +54,6 @@ export class UserConsumableComponent {
   setUpdate(data: any) {
     this.ConsumableName = data.ConsumableName;
     this.Quantity = data.Quantity;
-    // this.ExpirationDate = data.ExpirationDate;
 
     this.currentID = data.ConsumableID;
   }
@@ -63,6 +63,16 @@ export class UserConsumableComponent {
       return 'Not-Available';
     } else if (Quantity < 5) {
       return 'Low-on-Stock';
+    } else {
+      return 'Available';
+    }
+  }
+
+  getStatusString(Quantity: number): string {
+    if (Quantity <= 0) {
+      return 'Not Available';
+    } else if (Quantity < 5) {
+      return 'Low on Stock';
     } else {
       return 'Available';
     }
@@ -78,31 +88,48 @@ export class UserConsumableComponent {
     );
   }
 
-  filterConsumables(): void{
-    if (this.SelectedCourseID !== null){
-      this.dataService.getConsumablesByCourseId(this.SelectedCourseID)
-      .subscribe((response: any) => {
-        console.log(response);
-        this.ConsumableArray = response.data;
-      },
-      (error) => {
-        console.error('Error connecting to API: ', error)
-      }
-      )
-    }
+  clearFilter(): void {
+    this.SelectedCourseID = null;
+
+    this.changeDetectorRef.detectChanges();
+    this.filterConsumables();
   }
 
-  assignCourse(): void{
+  filterConsumables(): void {
     if (this.SelectedCourseID !== null) {
-      this.dataService.getConsumablesByCourseId(this.SelectedCourseID)
-        .subscribe((response: any) => {
-          console.log(response);
+      this.dataService
+        .getConsumablesByCourseId(this.SelectedCourseID)
+        .subscribe(
+          (response: any) => {
+            this.ConsumableArray = response.data;
+          },
+          (error) => {
+            console.error('Error connecting to API: ', error);
+          }
+        );
+    } else {
+      this.http.get('http://localhost:8085/api/consumables').subscribe(
+        (response: any) => {
           this.ConsumableArray = response.data;
         },
         (error) => {
           console.error('Error connecting to API: ', error);
         }
       );
+    }
+  }
+  assignCourse(): void {
+    if (this.SelectedCourseID !== null) {
+      this.dataService
+        .getConsumablesByCourseId(this.SelectedCourseID)
+        .subscribe(
+          (response: any) => {
+            this.ConsumableArray = response.data;
+          },
+          (error) => {
+            console.error('Error connecting to API: ', error);
+          }
+        );
     }
   }
 }

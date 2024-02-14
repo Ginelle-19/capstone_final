@@ -20,4 +20,5 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminMenuComponent {
   imageUrl: string = '/assets/ccjef_logo.png'
+  
 }

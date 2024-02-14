@@ -7,8 +7,15 @@
           >Equipment Reports
         </p>
       </div>
+      <!-- Loader -->
       <div class="loader-container" *ngIf="!isResultLoaded">
-        <div class="loader"></div>
+        <div class="loader">
+          <label
+            >Sorry, we're having trouble loading the database. Try reloading the
+            page.</label
+          >
+          <div class="loading"></div>
+        </div>
       </div>
       <form>
         <div class="container-form-group">
@@ -124,7 +131,6 @@
           </tr>
         </thead>
         <tbody>
-          <!-- | paginate: { itemsPerPage: itemsPerPage, currentPage: p, totalItems: EquipmentArray.length } -->
           <tr
             *ngFor="
               let TransactionItem of TransactionArray

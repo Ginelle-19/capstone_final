@@ -8,15 +8,18 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-user-menu',
   standalone: true,
-  imports: [RouterModule, MatSidenavModule,
+  imports: [
+    RouterModule,
+    MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule,],
+    MatListModule,
+  ],
   templateUrl: './user-menu.component.html',
-  styleUrl: './user-menu.component.css'
+  styleUrl: './user-menu.component.css',
 })
 export class UserMenuComponent {
-  imageUrl: string = '/assets/ccjef_logo.png'
+  imageUrl: string = '/assets/ccjef_logo.png';
 
-
+  
 }

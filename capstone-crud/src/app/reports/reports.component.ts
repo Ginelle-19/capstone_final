@@ -186,17 +186,27 @@ export class ReportsComponent {
   }
 
   setDelete(data: any) {
-    this.http
-      .delete(
-        'http://localhost:8085/api/equipmentTrans/delete' +
-          '/' +
-          data.TransactionEquipID
-      )
-      .subscribe((resultData: any) => {
-        console.log(resultData);
-        alert('Record Deleted');
-        this.fetchTransactions();
-      });
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this record?'
+    );
+
+    if (confirmation) {
+      this.http
+        .delete(
+          'http://localhost:8085/api/equipmentTrans/delete' +
+            '/' +
+            data.TransactionEquipID
+        )
+        .subscribe(
+          (resultData: any) => {
+            alert('Record Deleted');
+            this.fetchTransactions();
+          },
+          (error) => {
+            console.error('Error deleting record: ', error);
+          }
+        );
+    }
   }
 
   // get courses for dropdown

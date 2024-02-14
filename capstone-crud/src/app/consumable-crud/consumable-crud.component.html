@@ -6,8 +6,15 @@
           <mat-icon fontIcon="eco" aria-hidden="false"> </mat-icon>Consumables
         </p>
       </div>
+      <!-- Loader -->
       <div class="loader-container" *ngIf="!isResultLoaded">
-        <div class="loader"></div>
+        <div class="loader">
+          <label
+            >Sorry, we're having trouble loading the database. Try reloading the
+            page.</label
+          >
+          <div class="loading"></div>
+        </div>
       </div>
       <form>
         <div class="container-form-group">
