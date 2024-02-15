@@ -227,7 +227,7 @@ export class EquipmentCrudComponent {
   EquipmentName: string = '';
   Quantity: string = '';
   CourseID!: number;
-  CalibrationSchedule: Date = new Date();
+  CalibrationSchedule: Date | null = null;
 
   minDate: string;
 
@@ -264,10 +264,7 @@ export class EquipmentCrudComponent {
     let bodyData = {
       EquipmentName: this.EquipmentName,
       Quantity: this.Quantity,
-      CalibrationSchedule: this.datePipe.transform(
-        this.CalibrationSchedule,
-        'yyyy-MM-dd'
-      ),
+      CalibrationSchedule: this.CalibrationSchedule || null,
       CourseID: this.CourseID,
     };
 

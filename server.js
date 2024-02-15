@@ -168,7 +168,7 @@ server.post("/api/equipments/add", (req, res) => {
         EquipmentName: req.body.EquipmentName,
         Quantity: req.body.Quantity,
         CourseID: req.body.CourseID,
-        CalibrationSchedule: req.body.CalibrationSchedule
+        CalibrationSchedule: req.body.CalibrationSchedule || null
     };
     let sql = "INSERT INTO tblEquipment SET ?";
     db.query(sql, details, (error) => {
@@ -201,7 +201,7 @@ server.put("/api/equipments/update/:id", (req, res) => {
     "', CourseID='" +
     req.body.CourseID +
     "', CalibrationSchedule=" +
-    (req.body.CalibrationSchedule ? "'" + req.body.CalibrationSchedule + "'" : "NULL") + // Ensure the received date is properly formatted
+    (req.body.CalibrationSchedule ? "'" + req.body.CalibrationSchedule + "'" : "NULL") + 
     " WHERE EquipmentID=" +
     req.params.id;
     let a = db.query(sql, (error, result) => {
