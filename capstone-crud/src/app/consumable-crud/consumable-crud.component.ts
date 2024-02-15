@@ -84,10 +84,7 @@ export class ConsumableCrudComponent {
     let bodyData = {
       ConsumableName: this.ConsumableName,
       Quantity: this.Quantity,
-      ExpirationDate: this.datePipe.transform(
-        this.ExpirationDate,
-        'yyyy-MM-dd'
-      ),
+      ExpirationDate: this.ExpirationDate || null,
       CourseID: this.CourseID,
     };
 

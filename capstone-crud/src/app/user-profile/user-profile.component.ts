@@ -23,7 +23,7 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class UserProfileComponent implements OnInit {
   currentUser: any;
-
+  birthdateError: string = '';
   constructor(
     private authService: AuthService,
     private http: HttpClient,
@@ -56,6 +56,18 @@ export class UserProfileComponent implements OnInit {
         console.error('Error fetching user data:', error);
       }
     );
+  }
+
+  validateBirthdate() {
+    const selectedDate = new Date(this.Birthdate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate >= today) {
+      this.birthdateError = 'Birthdate cannot be set to today or the future.';
+    } else {
+      this.birthdateError = '';
+    }
   }
 
   getAllUsers(): void {
@@ -107,6 +119,15 @@ export class UserProfileComponent implements OnInit {
       return;
     }
 
+    if (this.birthdateError !== '') {
+      console.error(
+        'Validation error: Birthdate cannot be set to today or the future.'
+      );
+      alert(
+        'Validation error: Birthdate cannot be set to today or the future.'
+      );
+    }
+
     let bodyData = {
       LastName: this.LastName,
       FirstName: this.FirstName,
@@ -118,20 +139,30 @@ export class UserProfileComponent implements OnInit {
       AccessLevelID: this.currentUser.AccessLevelID,
     };
 
-    this.http
-      .put(
-        'http://localhost:8085/api/users/update/' + this.currentUser.AccountID,
-        bodyData
-      )
-      .subscribe((resultData: any) => {
-        alert('Profile Updated Successfully!');
+    // Only proceed with the HTTP request if there are no validation errors
+    if (!this.birthdateError) {
+      console.log('Sending HTTP request to update profile:', bodyData);
 
-        this.authService.updateCurrentUser(bodyData);
-
-        this.refreshUserData();
-
-        this.toggleEditMode();
-      });
+      this.http
+        .put(
+          'http://localhost:8085/api/users/update/' +
+            this.currentUser.AccountID,
+          bodyData
+        )
+        .subscribe({
+          next: (resultData: any) => {
+            console.log('Profile Updated Successfully!');
+            alert('Profile Updated Successfully!');
+            this.authService.updateCurrentUser(bodyData);
+            this.refreshUserData();
+            this.toggleEditMode();
+          },
+          error: (error) => {
+            console.error('Error updating profile:', error);
+            // Log additional details about the error, or handle it as needed
+          },
+        });
+    }
   }
 
   refreshUserData(): void {

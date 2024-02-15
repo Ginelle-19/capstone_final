@@ -245,7 +245,7 @@ server.post("/api/consumables/add", (req, res) => {
         Quantity: req.body.Quantity,
         CourseID: req.body.CourseID,
         // ConsumableStat: req.body.ConsumableStat,
-        ExpirationDate: req.body.ExpirationDate
+        ExpirationDate: req.body.ExpirationDate || null
     };
     let sql = "INSERT INTO tblConsumable SET ?";
     db.query(sql, details, (error) => {
