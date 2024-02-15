@@ -50,7 +50,7 @@ server.post('/send-email', (req, res) => {
         service: 'gmail',
         auth: {
             user: 'labsolutionsccjef@gmail.com', // Your email address
-            pass: '' // Your email password or app-specific password if using Gmail
+            pass: 'jqro oblg gkme qfdx' // Your email password or app-specific password if using Gmail
         }
     });
   
@@ -278,7 +278,7 @@ server.put("/api/consumables/update/:id", (req, res) => {
     "', CourseID='" +
     req.body.CourseID +
     "', ExpirationDate=" +
-    (req.body.ExpirationDate ? "'" + req.body.ExpirationDate + "'" : "NULL") +
+    (req.body.ExpirationDate ? "'" + req.body.ExpirationDate + "'" : "NULL") + 
     " WHERE ConsumableID=" +
     req.params.id;
 

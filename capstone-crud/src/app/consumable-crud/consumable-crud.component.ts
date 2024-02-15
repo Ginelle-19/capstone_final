@@ -43,7 +43,7 @@ export class ConsumableCrudComponent {
   ConsumableName: string = '';
   Quantity?: number;
   ConsumableStat: string = '';
-  ExpirationDate: Date = new Date();
+  ExpirationDate: Date | null = null;
 
   SelectedCourseID: number | null = null;
 
