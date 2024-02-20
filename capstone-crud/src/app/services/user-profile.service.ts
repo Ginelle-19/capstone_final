@@ -12,7 +12,6 @@ export class UserProfileService implements Resolve<Observable<any> | Promise<any
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     const AccountID = route.params['AccountID'];
-    // Pass the user ID to getCurrentUser() to fetch the user's data
     return this.authService.getCurrentUser(AccountID);
   }
 }

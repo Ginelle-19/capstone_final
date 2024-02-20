@@ -39,10 +39,9 @@ export class FacilityCrudComponent {
 
   getAllRooms() {
     this.http
-      .get('http://localhost:8085/api/room')
+      .get('http://89.116.21.168:3000/api/room')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
-        console.log(resultData);
         this.RoomsArray = resultData.data;
       });
   }
@@ -51,16 +50,15 @@ export class FacilityCrudComponent {
     let bodyData = {
       RoomName: this.RoomName,
       RoomDesc: this.RoomDesc,
-      // RoomStatus: this.RoomStatus,
     };
 
     this.http
-      .post('http://localhost:8085/api/room/add', bodyData)
+      .post('http://89.116.21.168:3000/api/room/add', bodyData)
       .subscribe((resultData: any) => {
-        console.log(resultData);
         alert('Room Added Successfully!');
         this.getAllRooms();
       });
+    this.clearInputs();
   }
 
   setUpdate(data: any) {
@@ -80,14 +78,14 @@ export class FacilityCrudComponent {
 
     this.http
       .put(
-        'http://localhost:8085/api/room/update' + '/' + data.RoomID,
+        'http://89.116.21.168:3000/api/room/update' + '/' + data.RoomID,
         bodyData
       )
       .subscribe((resultData: any) => {
-        console.log(resultData);
         alert('Room Updated Successfully!');
         this.getAllRooms();
       });
+    this.clearInputs();
   }
 
   toggleActive(data: any) {
@@ -101,22 +99,8 @@ export class FacilityCrudComponent {
     }
   }
 
-  // save() {
-  //   if (this.RoomID && this.RoomID !== '') {
-  //     // Construct an object with the necessary room data
-  //     const roomData = {
-  //       RoomName: this.RoomName,
-  //       RoomDesc: this.RoomDesc,
-  //       RoomStatus: this.RoomStatus,
-  //       RoomID: this.RoomID,
-  //     };
-  //     this.UpdateRecords(roomData);
-  //   } else {
-  //     this.addRooms();
-  //   }
-  // }
   save() {
-    if (this.RoomID) { // Check if RoomID is not null or undefined
+    if (this.RoomID && this.RoomID !== '') {
       const roomData = {
         RoomName: this.RoomName,
         RoomDesc: this.RoomDesc,
@@ -127,6 +111,12 @@ export class FacilityCrudComponent {
     } else {
       this.addRooms();
     }
+    this.clearInputs();
+  }
+
+  clearInputs() {
+    this.RoomName = '';
+    this.RoomDesc = '';
   }
 
   deleteRoom(room: any) {
@@ -136,7 +126,7 @@ export class FacilityCrudComponent {
 
     if (confirmation) {
       this.http
-        .delete('http://localhost:8085/api/room/delete/' + room.RoomID)
+        .delete('http://89.116.21.168:3000/api/room/delete/' + room.RoomID)
         .subscribe(
           (resultData: any) => {
             alert('Record Deleted');

@@ -35,7 +35,7 @@ export class ManageUsersComponent {
     StudentNum: '',
     AccessLevelID: '',
     isActive: false,
-    AccountID: '' // Initialize AccountID here
+    AccountID: ''
   };
 
   searchStudentNum: string = '';
@@ -48,36 +48,45 @@ export class ManageUsersComponent {
 
   getAllUsers() {
     this.http
-      .get('http://localhost:8085/api/users')
-      .subscribe((resultData: any) => {
-        this.isResultLoaded = true;
-        console.log(resultData.data);
-        this.users = resultData.data;
-      });
+      .get('http://89.116.21.168:3000/api/users')
+      .subscribe(
+        (resultData: any) => {
+          this.isResultLoaded = true;
+          if (Array.isArray(resultData)) {
+            this.users = resultData; // Assign the users array if it's an array
+          } else if (resultData && resultData.data && Array.isArray(resultData.data)) {
+            this.users = resultData.data; // Assign the users array if it's nested under 'data'
+          } else {
+            console.error('Invalid API response:', resultData);
+          }
+        },
+        (error) => {
+          console.error('Error fetching users:', error); // Log any errors
+        }
+      );
   }
+  
 
   addUser() {
     this.http
-      .post('http://localhost:8085/api/users/add', this.currentUser)
+      .post('http://89.116.21.168:3000/api/users/add', this.currentUser)
       .subscribe((resultData: any) => {
-        console.log(resultData);
         alert('User Added Successfully!');
         this.getAllUsers();
       });
   }
 
   setUpdate(user: any) {
-    // Set currentUser to the selected user for editing
-    this.currentUser = { ...user }; // Copy user object to prevent reference mutation
+    this.currentUser = { ...user }; 
     this.currentUser.AccountID = user.AccountID;
     this.isUpdateFormActive = true;
   }
 
   toggleActive(currentUser: any) {
     if (currentUser && currentUser.isActive !== undefined) {
-      currentUser.isActive = currentUser.isActive === 1 ? 0 : 1; // Toggle isActive value
+      currentUser.isActive = currentUser.isActive === 1 ? 0 : 1; 
       currentUser.AccountID = currentUser.AccountID;
-      this.UpdateRecords(currentUser); // Update the record with the new isActive value
+      this.UpdateRecords(currentUser); 
     } else {
       console.error(
         'currentUser is undefined or does not have an isActive property'
@@ -99,11 +108,10 @@ export class ManageUsersComponent {
 
     this.http
       .put(
-        `http://localhost:8085/api/users/update/${currentUser.AccountID}`,
+        `http://89.116.21.168:3000/api/users/update/${currentUser.AccountID}`,
         bodyData
       )
       .subscribe((resultData: any) => {
-        console.log(resultData);
         alert('User Updated Successfully!');
         this.getAllUsers();
       });
@@ -125,7 +133,7 @@ export class ManageUsersComponent {
     if (confirmation) {
       this.http
         .delete(
-          'http://localhost:8085/api/users/delete' +
+          'http://89.116.21.168:3000/api/users/delete' +
             '/' +
             user.AccountID
         )
@@ -142,7 +150,7 @@ export class ManageUsersComponent {
   }
 
   setCurrentUser(user: any) {
-    this.currentUser = { ...user }; // copy user object to prevent reference mutation
+    this.currentUser = { ...user }; 
     this.currentUser.AccountID = user.AccountID;
     this.isUpdateFormActive = true;
   }
@@ -156,40 +164,38 @@ export class ManageUsersComponent {
       Birthdate: '',
       StudentNum: '',
       isActive: false,
-      AccountID: '' // Reset AccountID when cancelling update
+      AccountID: '' 
     };
     this.isUpdateFormActive = false;
   }
 
   loadAccessLevels() {
     this.http
-      .get('http://localhost:8085/api/access')
+      .get('http://89.116.21.168:3000/api/access')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
-        console.log(resultData.data);
         this.AccessLevels = resultData.data;
       });
   }
 
   updateAccessLevel(currentUser: any) {
-    this.UpdateRecords(currentUser); // Call your existing method to update the user's record
+    this.UpdateRecords(currentUser); 
   }
 
   searchUserByStudentNum() {
     if (this.searchStudentNum.trim() !== '') {
       const searchTerm = this.searchStudentNum.trim();
-      this.http.get(`http://localhost:8085/api/users/search/${searchTerm}`)
-        .subscribe((resultData: any) => {
-          if (resultData.status && resultData.user) {
-            // Update the filteredUsers array with the search result
-            this.filteredUsers = [resultData.user];
-          } else {
-            alert(resultData.message);
-            this.filteredUsers = []; // Clear the filtered users array if no user found
-          }
-          // Reset pagination to display the searched user if found
-          this.p = 1;
-        }, (error) => {
+      this.http.get(`http://89.116.21.168:3000/api/users/search/${searchTerm}`)
+      .subscribe((resultData: any) => {
+        if (resultData.status && resultData.user) {
+          this.filteredUsers = Array.isArray(resultData.user) ? resultData.user : [resultData.user];
+        } else {
+          alert(resultData.message);
+          this.filteredUsers = [];
+        }
+        this.p = 1;
+      }
+      , (error) => {
           console.error('Error searching user by StudentNum:', error);
           alert('Error searching user by StudentNum. Please try again later.');
         });
@@ -199,8 +205,8 @@ export class ManageUsersComponent {
   }
 
   clearSearch() {
-    this.searchStudentNum = ''; // Clear the search input
-    this.filteredUsers = []; // Clear the filtered users array
-    this.p = 1; // Reset pagination to the first page
+    this.searchStudentNum = ''; 
+    this.filteredUsers = []; 
+    this.p = 1; 
   }
 }

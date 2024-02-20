@@ -44,7 +44,6 @@ export class CourseCrudComponent {
 
   p: number = 1;
   itemsPerPage: number = 7;
-  // added course service, remove if not working
   constructor(private http: HttpClient) {
     this.getAllCourses();
   }
@@ -53,10 +52,9 @@ export class CourseCrudComponent {
 
   getAllCourses() {
     this.http
-      .get('http://localhost:8085/api/courses')
+      .get('http://89.116.21.168:3000/api/courses')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
-        console.log(resultData.data);
         this.CourseArray = resultData.data;
       });
   }
@@ -68,12 +66,12 @@ export class CourseCrudComponent {
     };
 
     this.http
-      .post('http://localhost:8085/api/courses/add', bodyData)
+      .post('http://89.116.21.168:3000/api/courses/add', bodyData)
       .subscribe((resultData: any) => {
-        console.log(resultData);
         alert('Course Added Successfully!');
         this.getAllCourses();
       });
+    this.clearInputs();
   }
 
   setUpdate(data: any) {
@@ -91,11 +89,10 @@ export class CourseCrudComponent {
 
     this.http
       .put(
-        'http://localhost:8085/api/courses/update' + '/' + this.currentID,
+        'http://89.116.21.168:3000/api/courses/update' + '/' + this.currentID,
         bodyData
       )
       .subscribe((resultData: any) => {
-        console.log(resultData);
         alert('Course Updated Successfully!');
         this.getAllCourses();
       });
@@ -107,6 +104,11 @@ export class CourseCrudComponent {
     } else {
       this.UpdateRecords();
     }
+    this.clearInputs();
+  }
+  clearInputs() {
+    this.CourseCode = '';
+    this.CourseName = '';
   }
 
   setDelete(data: any) {
@@ -117,7 +119,7 @@ export class CourseCrudComponent {
     if (confirmation) {
       this.http
         .delete(
-          'http://localhost:8085/api/courses/delete' + '/' + data.CourseID
+          'http://89.116.21.168:3000/api/courses/delete' + '/' + data.CourseID
         )
         .subscribe(
           (resultData: any) => {
@@ -132,11 +134,10 @@ export class CourseCrudComponent {
   }
 
   filterEquipments(): void {
-    const apiUrl = 'http://localhost:8085/api/equipments/${this.CourseID}';
+    const apiUrl = 'http://89.116.21.168:3000/api/equipments/${this.CourseID}';
 
     this.http.get(apiUrl).subscribe(
       (resultData: any) => {
-        console.log(resultData);
         this.EquipmentArray = resultData.data;
       },
       (error) => {
@@ -145,7 +146,6 @@ export class CourseCrudComponent {
     );
   }
   filterEquipment(): void {
-    // this.CourseID++;
     this.filterEquipments();
   }
 }

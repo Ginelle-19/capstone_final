@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
 
   getAllUsers(): void {
     this.http
-      .get('http://localhost:8085/api/users')
+      .get('http://89.116.21.168:3000/api/users')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.userArray = resultData.data;
@@ -139,19 +139,18 @@ export class ProfileComponent implements OnInit {
       AccessLevelID: this.currentUser.AccessLevelID,
     };
 
-    // Only proceed with the HTTP request if there are no validation errors
+
     if (!this.birthdateError) {
-      console.log('Sending HTTP request to update profile:', bodyData);
+
 
       this.http
         .put(
-          'http://localhost:8085/api/users/update/' +
+          'http://89.116.21.168:3000/api/users/update/' +
             this.currentUser.AccountID,
           bodyData
         )
         .subscribe({
           next: (resultData: any) => {
-            console.log('Profile Updated Successfully!');
             alert('Profile Updated Successfully!');
             this.authService.updateCurrentUser(bodyData);
             this.refreshUserData();
@@ -159,7 +158,6 @@ export class ProfileComponent implements OnInit {
           },
           error: (error) => {
             console.error('Error updating profile:', error);
-            // Log additional details about the error, or handle it as needed
           },
         });
     }
@@ -183,7 +181,7 @@ export class ProfileComponent implements OnInit {
         this.UserName = userData.UserName || '';
         this.Password = userData.Password || '';
         this.http
-          .get('http://localhost:8085/api/users/' + this.currentUser.AccountID)
+          .get('http://89.116.21.168:3000/api/users/' + this.currentUser.AccountID)
           .subscribe((resultData: any) => {
             this.isResultLoaded = true;
 

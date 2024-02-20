@@ -295,7 +295,7 @@ p mat-icon {
 }
 
 .table-pagination-inner {
-  grid-column: 2;
+  grid-column: 1;
   height: 40px;
   margin-top: -9px;
 }

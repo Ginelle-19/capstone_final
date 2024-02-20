@@ -355,3 +355,23 @@
       left: 0%;
     }
   }
+  .searchByStudNum {
+    padding: 20px 0px 5px 20px;
+  }
+  
+  .searchByStudNum input {
+    padding: 7px 10px;
+    border-style: none;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.185);
+    margin-right: 15px;
+  }
+  
+  .searchByStudNum button {
+    padding: 7px 16px;
+    background-color: var(--normal-color);
+  }
+  
+  .searchByStudNum button:nth-child(3) {
+    padding: 7px 23px;
+    margin-left: 10px;
+  }

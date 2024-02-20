@@ -8,23 +8,18 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ConsumableReportService {
-  private apiUrl = 'http://localhost:8085';
+  private apiUrl = 'http://89.116.21.168:3000';
 
   constructor(private http: HttpClient) { }
 
-  // getTransactions(): Observable<any[]> {
-  //   return this.http.get<any[]>(`${this.apiUrl}/consumableTrans`)
-  //     .pipe(
-  //       catchError(error => this.handleError(error))
-  //     );
-  // }
+
   getTransactions(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/api/consumableTrans`)
       .pipe(
         map(transactions => {
           return transactions.map(transaction => ({
             ...transaction,
-            StudentNum: transaction.account ? transaction.account.StudentNum : '' // Adjust this based on your API response structure
+            StudentNum: transaction.account ? transaction.account.StudentNum : '' 
           }));
         }),
         catchError(error => this.handleError(error))
@@ -56,7 +51,6 @@ export class ConsumableReportService {
   }
   getConsumablesByCourseId(CourseID: number): Observable<any[]> {
     const url = `${this.apiUrl}/api/consumables/${CourseID}`;
-    // const url = `${this.apiUrl}/${CourseID}`;
     return this.http.get<any[]>(url)
       .pipe(
         catchError(error => this.handleError(error))

@@ -114,18 +114,18 @@
         <div class="holdertwo">
           <div class="section-holder">
             <h4>Student Number</h4>
-            <p class="current-name-notallowed">{{ currentUser?.StudentNum }}</p>
+            <input type="text" [(ngModel)]="StudentNum" />
           </div>
           <div class="section-holder">
             <h4>UserName</h4>
-            <p class="current-name-notallowed">{{ currentUser?.UserName }}</p>
+            <input type="text" [(ngModel)]="UserName" />
           </div>
           <div class="section-holder">
             <h4>Password</h4>
             <input type="text" [(ngModel)]="Password" />
           </div>
         </div>
-      </div>
+        </div>
       <div class="button" *ngIf="isEditMode">
         <button (click)="UpdateProfile()">
           <mat-icon fontIcon="save" aria-hidden="false"> </mat-icon>Save
