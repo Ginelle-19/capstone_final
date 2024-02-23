@@ -43,7 +43,7 @@ export class UserConsumableComponent {
 
   getAllConsumables() {
     this.http
-      .get('http://89.116.21.168:3000/api/consumables')
+      .get('https://ccjeflabsolutions.online:3000/api/consumables')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
 
@@ -108,7 +108,7 @@ export class UserConsumableComponent {
           }
         );
     } else {
-      this.http.get('http://89.116.21.168:3000/api/consumables').subscribe(
+      this.http.get('https://ccjeflabsolutions.online:3000/api/consumables').subscribe(
         (response: any) => {
           this.ConsumableArray = response.data;
         },

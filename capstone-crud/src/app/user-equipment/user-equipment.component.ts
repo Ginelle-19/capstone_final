@@ -43,7 +43,7 @@ export class UserEquipmentComponent {
 
   getAllEquipments() {
     this.http
-      .get('http://89.116.21.168:3000/api/equipments/')
+      .get('https://ccjeflabsolutions.online:3000/api/equipments/')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
 
@@ -65,7 +65,7 @@ export class UserEquipmentComponent {
         }
       );
     } else {
-      this.http.get('http://89.116.21.168:3000/api/equipments').subscribe(
+      this.http.get('https://ccjeflabsolutions.online:3000/api/equipments').subscribe(
         (response: any) => {
           this.EquipmentArray = response.data;
         },

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ConsumableReportService {
-  private apiUrl = 'http://89.116.21.168:3000';
+  private apiUrl = 'https://ccjeflabsolutions.online:3000';
 
   constructor(private http: HttpClient) { }
 

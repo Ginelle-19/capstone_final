@@ -96,7 +96,7 @@ export class ConsumableReportsComponent {
 
   fetchTransactions() {
     this.http
-      .get('http://89.116.21.168:3000/api/consumableTrans/')
+      .get('https://ccjeflabsolutions.online:3000/api/consumableTrans/')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.TransactionArray = resultData.data;
@@ -126,7 +126,7 @@ export class ConsumableReportsComponent {
     };
 
     this.http
-      .post('http://89.116.21.168:3000/api/consumableTrans/add', bodyData)
+      .post('https://ccjeflabsolutions.online:3000/api/consumableTrans/add', bodyData)
       .subscribe((resultData: any) => {
         alert('Transaction Created!');
         this.fetchTransactions();
@@ -166,7 +166,7 @@ export class ConsumableReportsComponent {
     };
     this.http
       .put(
-        'http://89.116.21.168:3000/api/consumableTrans/update' +
+        'https://ccjeflabsolutions.online:3000/api/consumableTrans/update' +
           '/' +
           this.currentID,
         bodyData
@@ -201,7 +201,7 @@ export class ConsumableReportsComponent {
     if (confirmation) {
       this.http
         .delete(
-          'http://89.116.21.168:3000/api/consumableTrans/delete' +
+          'https://ccjeflabsolutions.online:3000/api/consumableTrans/delete' +
             '/' +
             data.TransactionConsumeID
         )

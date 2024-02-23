@@ -52,7 +52,7 @@ export class CourseCrudComponent {
 
   getAllCourses() {
     this.http
-      .get('http://89.116.21.168:3000/api/courses')
+      .get('https://ccjeflabsolutions.online:3000/api/courses')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.CourseArray = resultData.data;
@@ -66,7 +66,7 @@ export class CourseCrudComponent {
     };
 
     this.http
-      .post('http://89.116.21.168:3000/api/courses/add', bodyData)
+      .post('https://ccjeflabsolutions.online:3000/api/courses/add', bodyData)
       .subscribe((resultData: any) => {
         alert('Course Added Successfully!');
         this.getAllCourses();
@@ -89,7 +89,7 @@ export class CourseCrudComponent {
 
     this.http
       .put(
-        'http://89.116.21.168:3000/api/courses/update' + '/' + this.currentID,
+        'https://ccjeflabsolutions.online:3000/api/courses/update' + '/' + this.currentID,
         bodyData
       )
       .subscribe((resultData: any) => {
@@ -119,7 +119,7 @@ export class CourseCrudComponent {
     if (confirmation) {
       this.http
         .delete(
-          'http://89.116.21.168:3000/api/courses/delete' + '/' + data.CourseID
+          'https://ccjeflabsolutions.online:3000/api/courses/delete' + '/' + data.CourseID
         )
         .subscribe(
           (resultData: any) => {
@@ -134,7 +134,7 @@ export class CourseCrudComponent {
   }
 
   filterEquipments(): void {
-    const apiUrl = 'http://89.116.21.168:3000/api/equipments/${this.CourseID}';
+    const apiUrl = 'https://ccjeflabsolutions.online:3000/api/equipments/${this.CourseID}';
 
     this.http.get(apiUrl).subscribe(
       (resultData: any) => {

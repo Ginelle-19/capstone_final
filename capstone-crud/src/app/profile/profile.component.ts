@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
 
   getAllUsers(): void {
     this.http
-      .get('http://89.116.21.168:3000/api/users')
+      .get('https://ccjeflabsolutions.online:3000/api/users')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.userArray = resultData.data;
@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
 
       this.http
         .put(
-          'http://89.116.21.168:3000/api/users/update/' +
+          'https://ccjeflabsolutions.online:3000/api/users/update/' +
             this.currentUser.AccountID,
           bodyData
         )
@@ -181,7 +181,7 @@ export class ProfileComponent implements OnInit {
         this.UserName = userData.UserName || '';
         this.Password = userData.Password || '';
         this.http
-          .get('http://89.116.21.168:3000/api/users/' + this.currentUser.AccountID)
+          .get('https://ccjeflabsolutions.online:3000/api/users/' + this.currentUser.AccountID)
           .subscribe((resultData: any) => {
             this.isResultLoaded = true;
 

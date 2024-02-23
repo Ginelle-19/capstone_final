@@ -23,7 +23,7 @@ export class UserFacilityComponent {
 
   getAllFacilities() {
     this.http
-      .get('http://89.116.21.168:3000/api/room')
+      .get('https://ccjeflabsolutions.online:3000/api/room')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.RoomsArray = resultData.data;

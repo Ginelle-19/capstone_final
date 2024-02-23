@@ -99,7 +99,7 @@ public SavePDF(): void {
 
   fetchTransactions() {
     this.http
-      .get('http://89.116.21.168:3000/api/equipmentTrans/')
+      .get('https://ccjeflabsolutions.online:3000/api/equipmentTrans/')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.TransactionArray = resultData.data;
@@ -130,7 +130,7 @@ public SavePDF(): void {
     };
 
     this.http
-      .post('http://89.116.21.168:3000/api/equipmentTrans/add', bodyData)
+      .post('https://ccjeflabsolutions.online:3000/api/equipmentTrans/add', bodyData)
       .subscribe((resultData: any) => {
         alert('Transaction Created!');
         this.fetchTransactions();
@@ -167,7 +167,7 @@ public SavePDF(): void {
     };
     this.http
       .put(
-        'http://89.116.21.168:3000/api/equipmentTrans/update' +
+        'https://ccjeflabsolutions.online:3000/api/equipmentTrans/update' +
           '/' +
           this.currentID,
         bodyData
@@ -193,7 +193,7 @@ public SavePDF(): void {
     if (confirmation) {
       this.http
         .delete(
-          'http://89.116.21.168:3000/api/equipmentTrans/delete' +
+          'https://ccjeflabsolutions.online:3000/api/equipmentTrans/delete' +
             '/' +
             data.TransactionEquipID
         )

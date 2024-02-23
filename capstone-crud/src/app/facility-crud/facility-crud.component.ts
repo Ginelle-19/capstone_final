@@ -39,7 +39,7 @@ export class FacilityCrudComponent {
 
   getAllRooms() {
     this.http
-      .get('http://89.116.21.168:3000/api/room')
+      .get('https://ccjeflabsolutions.online:3000/api/room')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.RoomsArray = resultData.data;
@@ -53,7 +53,7 @@ export class FacilityCrudComponent {
     };
 
     this.http
-      .post('http://89.116.21.168:3000/api/room/add', bodyData)
+      .post('https://ccjeflabsolutions.online:3000/api/room/add', bodyData)
       .subscribe((resultData: any) => {
         alert('Room Added Successfully!');
         this.getAllRooms();
@@ -78,7 +78,7 @@ export class FacilityCrudComponent {
 
     this.http
       .put(
-        'http://89.116.21.168:3000/api/room/update' + '/' + data.RoomID,
+        'https://ccjeflabsolutions.online:3000/api/room/update' + '/' + data.RoomID,
         bodyData
       )
       .subscribe((resultData: any) => {
@@ -126,7 +126,7 @@ export class FacilityCrudComponent {
 
     if (confirmation) {
       this.http
-        .delete('http://89.116.21.168:3000/api/room/delete/' + room.RoomID)
+        .delete('https://ccjeflabsolutions.online:3000/api/room/delete/' + room.RoomID)
         .subscribe(
           (resultData: any) => {
             alert('Record Deleted');

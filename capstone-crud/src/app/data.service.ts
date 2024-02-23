@@ -9,9 +9,9 @@ import {catchError, map} from 'rxjs/operators'
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = 'http://89.116.21.168:3000/api/equipments';
-  private conUrl = 'http://89.116.21.168:3000/api/consumables'
-  private Url = 'http://89.116.21.168:3000/api/users';
+  private apiUrl = 'https://ccjeflabsolutions.online:3000/api/equipments';
+  private conUrl = 'https://ccjeflabsolutions.online:3000/api/consumables'
+  private Url = 'https://ccjeflabsolutions.online:3000/api/users';
 
   // httpOptions = {
   //   headers: new HttpHeaders({
@@ -36,7 +36,7 @@ export class DataService {
     return this.http.get<any>(url);
   }
   getCourses(): Observable<any> {
-    const url = 'http://89.116.21.168:3000/api/courses';
+    const url = 'https://ccjeflabsolutions.online:3000/api/courses';
     return this.http.get(url);
   }
 

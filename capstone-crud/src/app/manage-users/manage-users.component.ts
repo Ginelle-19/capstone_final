@@ -48,7 +48,7 @@ export class ManageUsersComponent {
 
   getAllUsers() {
     this.http
-      .get('http://89.116.21.168:3000/api/users')
+      .get('https://ccjeflabsolutions.online:3000/api/users')
       .subscribe(
         (resultData: any) => {
           this.isResultLoaded = true;
@@ -69,7 +69,7 @@ export class ManageUsersComponent {
 
   addUser() {
     this.http
-      .post('http://89.116.21.168:3000/api/users/add', this.currentUser)
+      .post('https://ccjeflabsolutions.online:3000/api/users/add', this.currentUser)
       .subscribe((resultData: any) => {
         alert('User Added Successfully!');
         this.getAllUsers();
@@ -108,7 +108,7 @@ export class ManageUsersComponent {
 
     this.http
       .put(
-        `http://89.116.21.168:3000/api/users/update/${currentUser.AccountID}`,
+        `https://ccjeflabsolutions.online:3000/api/users/update/${currentUser.AccountID}`,
         bodyData
       )
       .subscribe((resultData: any) => {
@@ -133,7 +133,7 @@ export class ManageUsersComponent {
     if (confirmation) {
       this.http
         .delete(
-          'http://89.116.21.168:3000/api/users/delete' +
+          'https://ccjeflabsolutions.online:3000/api/users/delete' +
             '/' +
             user.AccountID
         )
@@ -171,7 +171,7 @@ export class ManageUsersComponent {
 
   loadAccessLevels() {
     this.http
-      .get('http://89.116.21.168:3000/api/access')
+      .get('https://ccjeflabsolutions.online:3000/api/access')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.AccessLevels = resultData.data;
@@ -185,7 +185,7 @@ export class ManageUsersComponent {
   searchUserByStudentNum() {
     if (this.searchStudentNum.trim() !== '') {
       const searchTerm = this.searchStudentNum.trim();
-      this.http.get(`http://89.116.21.168:3000/api/users/search/${searchTerm}`)
+      this.http.get(`https://ccjeflabsolutions.online:3000/api/users/search/${searchTerm}`)
       .subscribe((resultData: any) => {
         if (resultData.status && resultData.user) {
           this.filteredUsers = Array.isArray(resultData.user) ? resultData.user : [resultData.user];

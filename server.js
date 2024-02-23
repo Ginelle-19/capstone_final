@@ -2,8 +2,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
 const mysql = require("mysql2");
+const https = require("https"); // Import the https module
+const fs = require("fs"); // Import the fs module
 const server = express();
 const cors = require("cors");
+
+// Load SSL/TLS certificate and key
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/ccjeflabsolutions.online/privkey.pem'), // Replace '/path/to/private.key' with the path to your private key file
+  cert: fs.readFileSync('/etc/letsencrypt/live/ccjeflabsolutions.online/fullchain.pem'), // Replace '/path/to/certificate.crt' with the path to your certificate file
+  secureProtocol: 'TLSv1_2_method',
+  ciphers: 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384',
+
+};
+
+// Create HTTPS server with SSL/TLS configuration
+const httpsServer = https.createServer(options, server);
 
 // Middleware to enable CORS
 server.use((req, res, next) => {
@@ -13,7 +27,7 @@ server.use((req, res, next) => {
   next();
 });
 
-const allowedOrigins = ['http://ccjeflabsolutions.online'];
+const allowedOrigins = ['https://ccjeflabsolutions.online'];
 
 const corsOptions = {
   origin: function (origin, callback) {
@@ -89,6 +103,10 @@ server.post("/send-email", (req, res) => {
     }
   });
 });
+
+
+
+
 
 //---------------------------------------------------------------------------------------
 // -------------------------------- API FOR USERS ----------------------------------
@@ -836,9 +854,9 @@ server.delete("/api/access/delete/:id", (req, res) => {
 // -------------------------------- ESTABLISHING SERVER PORT ----------------------------------
 
 // Establish the Port
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const PORT_HTTPS = process.env.PORT_HTTPS || 3000; // Use the environment port or 443 if not available
+httpsServer.listen(PORT_HTTPS, () => {
+  console.log(`HTTPS Server is running on port ${PORT_HTTPS}`);
 });
 // Serve the static files from the Angular app
 server.use(express.static(path.join(__dirname, "dist", "client")));

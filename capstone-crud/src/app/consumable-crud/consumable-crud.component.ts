@@ -72,7 +72,7 @@ export class ConsumableCrudComponent {
 
   getAllConsumables() {
     this.http
-      .get('http://89.116.21.168:3000/api/consumables')
+      .get('https://ccjeflabsolutions.online:3000/api/consumables')
       .subscribe((resultData: any) => {
         this.isResultLoaded = true;
         this.ConsumableArray = resultData.data;
@@ -88,7 +88,7 @@ export class ConsumableCrudComponent {
     };
 
     this.http
-      .post('http://89.116.21.168:3000/api/consumables/add', bodyData)
+      .post('https://ccjeflabsolutions.online:3000/api/consumables/add', bodyData)
       .subscribe((resultData: any) => {
         alert('Consumable Added Successfully!');
         this.getAllConsumables();
@@ -117,7 +117,7 @@ export class ConsumableCrudComponent {
 
     this.http
       .put(
-        'http://89.116.21.168:3000/api/consumables/update' + '/' + this.currentID,
+        'https://ccjeflabsolutions.online:3000/api/consumables/update' + '/' + this.currentID,
         bodyData
       )
       .subscribe((resultData: any) => {
@@ -151,7 +151,7 @@ export class ConsumableCrudComponent {
     if (confirmation) {
       this.http
         .delete(
-          'http://89.116.21.168:3000/api/consumables/delete' +
+          'https://ccjeflabsolutions.online:3000/api/consumables/delete' +
             '/' +
             data.ConsumableID
         )
@@ -226,7 +226,7 @@ export class ConsumableCrudComponent {
       }
 
       this.http
-        .post('http://89.116.21.168:3000/send-email', { content: emailContent })
+        .post('https://ccjeflabsolutions.online:3000/send-email', { content: emailContent })
         .subscribe(
           (response) => {
             this.emailSent = true; 
@@ -274,7 +274,7 @@ export class ConsumableCrudComponent {
           }
         );
     } else {
-      this.http.get('http://89.116.21.168:3000/api/consumables').subscribe(
+      this.http.get('https://ccjeflabsolutions.online:3000/api/consumables').subscribe(
         (response: any) => {
           this.ConsumableArray = response.data;
         },
